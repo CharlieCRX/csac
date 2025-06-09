@@ -1,0 +1,448 @@
+arm-sigmastar-linux-uclibcgnueabihf-12.4.0-gcc -static -Wall -std=gnu99 -fPIC -g -I. -I../common   -c -o ruclock.o ruclock.c
+ruclock.c: In function 'test_get_status_metadatas':
+ruclock.c:8:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+    8 | {
+      | ^
+ruclock.c:14:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   14 | {
+      | ^
+ruclock.c:53:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   53 | {
+      | ^
+ruclock.c:75:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   75 | {
+      | ^
+ruclock.c:125:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  125 | {
+      | ^
+ruclock.c:137:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  137 | {
+      | ^
+ruclock.c:153:64: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  153 | const Telemetry_StatusMeta* ruclock_get_status_metadatas(void) {
+      |                                                                ^
+ruclock.c:157:48: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  157 | size_t ruclock_get_status_metadata_count(void) {
+      |                                                ^
+ruclock.c:161:85: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  161 | const Telemetry_StatusMeta* ruclock_find_status_metadata(E_telemetry_status target) {
+      |                                                                                     ^
+ruclock.c:172:38: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  172 | void test_get_status_metadatas(void) {
+      |                                      ^
+ruclock.c:186:62: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  186 | int adjust_frequency(char flag, int freq, int *updated_freq) {
+      |                                                              ^
+ruclock.c:219:38: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  219 | int get_current_frequency(int *freq) {
+      |                                      ^
+ruclock.c:240:56: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  240 | int set_absolute_frequency(int abs_freq, int *now_freq){
+      |                                                        ^
+ruclock.c:243:62: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  243 | int adjust_relative_frequency(int offset_freq, int *now_freq){
+      |                                                              ^
+ruclock.c:250:35: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  250 | int latch_current_frequency(void) {
+      |                                   ^
+ruclock.c:267:33: error: storage class specified for parameter 'MODE_METAS'
+  267 | static const Telemetry_ModeMeta MODE_METAS[] = {
+      |                                 ^~~~~~~~~~
+ruclock.c:267:1: error: parameter 'MODE_METAS' is initialized
+  267 | static const Telemetry_ModeMeta MODE_METAS[] = {
+      | ^~~~~~
+ruclock.c:268:3: warning: braces around scalar initializer
+  268 |   {Enable_Analog,             'A', "Enable Analog tuning", 1},
+      |   ^
+ruclock.c:268:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:268:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  268 |   {Enable_Analog,             'A', "Enable Analog tuning", 1},
+      |    ^~~~~~~~~~~~~
+ruclock.c:268:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:268:31: warning: excess elements in scalar initializer
+  268 |   {Enable_Analog,             'A', "Enable Analog tuning", 1},
+      |                               ^~~
+ruclock.c:268:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:268:36: warning: excess elements in scalar initializer
+  268 |   {Enable_Analog,             'A', "Enable Analog tuning", 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:268:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:268:60: warning: excess elements in scalar initializer
+  268 |   {Enable_Analog,             'A', "Enable Analog tuning", 1},
+      |                                                            ^
+ruclock.c:268:60: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:3: warning: braces around scalar initializer
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |   ^
+ruclock.c:269:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |    ^~~~~~~~~~~~~~~~~~~~
+ruclock.c:269:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:31: warning: excess elements in scalar initializer
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |                               ^~~
+ruclock.c:269:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:36: warning: excess elements in scalar initializer
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:269:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:62: warning: excess elements in scalar initializer
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |                                                              ^
+ruclock.c:269:62: note: (near initialization for 'MODE_METAS')
+ruclock.c:269:3: warning: excess elements in scalar initializer
+  269 |   {Enable_Phase_Measure,      'M', "1PPS phase measurement", 1},
+      |   ^
+ruclock.c:269:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:3: warning: braces around scalar initializer
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |   ^
+ruclock.c:270:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |    ^~~~~~~~~~~
+ruclock.c:270:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:31: warning: excess elements in scalar initializer
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |                               ^~~
+ruclock.c:270:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:36: warning: excess elements in scalar initializer
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |                                    ^~~~~~~~~~~~~~~~
+ruclock.c:270:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:54: warning: excess elements in scalar initializer
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |                                                      ^
+ruclock.c:270:54: note: (near initialization for 'MODE_METAS')
+ruclock.c:270:3: warning: excess elements in scalar initializer
+  270 |   {Enable_Sync,               'S', "1PPS auto-sync", 1},
+      |   ^
+ruclock.c:270:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:3: warning: braces around scalar initializer
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |   ^
+ruclock.c:271:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |    ^~~~~~~~~~~~~~~~~
+ruclock.c:271:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:31: warning: excess elements in scalar initializer
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |                               ^~~
+ruclock.c:271:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:36: warning: excess elements in scalar initializer
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |                                    ^~~~~~~~~~~~~~~~~
+ruclock.c:271:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:55: warning: excess elements in scalar initializer
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |                                                       ^
+ruclock.c:271:55: note: (near initialization for 'MODE_METAS')
+ruclock.c:271:3: warning: excess elements in scalar initializer
+  271 |   {Enable_Discipline,         'D', "Discipline mode", 1},
+      |   ^
+ruclock.c:271:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:3: warning: braces around scalar initializer
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |   ^
+ruclock.c:272:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |    ^~~~~~~~~~~~~~~~~~
+ruclock.c:272:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:31: warning: excess elements in scalar initializer
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |                               ^~~
+ruclock.c:272:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:36: warning: excess elements in scalar initializer
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:272:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:60: warning: excess elements in scalar initializer
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |                                                            ^
+ruclock.c:272:60: note: (near initialization for 'MODE_METAS')
+ruclock.c:272:3: warning: excess elements in scalar initializer
+  272 |   {Enable_U_LOW_POWER,        'U', "Ultra-Low Power mode", 1},
+      |   ^
+ruclock.c:272:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:3: warning: braces around scalar initializer
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |   ^
+ruclock.c:273:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |    ^~~~~~~~~~~~~~~
+ruclock.c:273:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:31: warning: excess elements in scalar initializer
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |                               ^~~
+ruclock.c:273:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:36: warning: excess elements in scalar initializer
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |                                    ^~~~~~~~~~~~~~~~~~
+ruclock.c:273:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:56: warning: excess elements in scalar initializer
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |                                                        ^
+ruclock.c:273:56: note: (near initialization for 'MODE_METAS')
+ruclock.c:273:3: warning: excess elements in scalar initializer
+  273 |   {Enable_Checksum,           'C', "Require checksum", 1},
+      |   ^
+ruclock.c:273:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:3: warning: braces around scalar initializer
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |   ^
+ruclock.c:275:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |    ^~~~~~~~~~~~~~~~
+ruclock.c:275:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:31: warning: excess elements in scalar initializer
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |                               ^~~
+ruclock.c:275:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:36: warning: excess elements in scalar initializer
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:275:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:61: warning: excess elements in scalar initializer
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |                                                             ^
+ruclock.c:275:61: note: (near initialization for 'MODE_METAS')
+ruclock.c:275:3: warning: excess elements in scalar initializer
+  275 |   {DisEnable_Analog,          'a', "Disable Analog tuning", 0},
+      |   ^
+ruclock.c:275:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:3: warning: braces around scalar initializer
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |   ^
+ruclock.c:276:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |    ^~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:276:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:31: warning: excess elements in scalar initializer
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |                               ^~~
+ruclock.c:276:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:36: warning: excess elements in scalar initializer
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:276:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:65: warning: excess elements in scalar initializer
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |                                                                 ^
+ruclock.c:276:65: note: (near initialization for 'MODE_METAS')
+ruclock.c:276:3: warning: excess elements in scalar initializer
+  276 |   {DisEnable_Phase_Measure,   'm', "Disable phase measurement", 0},
+      |   ^
+ruclock.c:276:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:3: warning: braces around scalar initializer
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |   ^
+ruclock.c:277:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |    ^~~~~~~~~~~~~~
+ruclock.c:277:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:31: warning: excess elements in scalar initializer
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |                               ^~~
+ruclock.c:277:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:36: warning: excess elements in scalar initializer
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~~
+ruclock.c:277:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:57: warning: excess elements in scalar initializer
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |                                                         ^
+ruclock.c:277:57: note: (near initialization for 'MODE_METAS')
+ruclock.c:277:3: warning: excess elements in scalar initializer
+  277 |   {DisEnable_Sync,            's', "Disable auto-sync", 0},
+      |   ^
+ruclock.c:277:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:3: warning: braces around scalar initializer
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |   ^
+ruclock.c:278:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |    ^~~~~~~~~~~~~~~~~~~~
+ruclock.c:278:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:31: warning: excess elements in scalar initializer
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |                               ^~~
+ruclock.c:278:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:36: warning: excess elements in scalar initializer
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~~~
+ruclock.c:278:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:58: warning: excess elements in scalar initializer
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |                                                          ^
+ruclock.c:278:58: note: (near initialization for 'MODE_METAS')
+ruclock.c:278:3: warning: excess elements in scalar initializer
+  278 |   {DisEnable_Discipline,      'd', "Disable discipline", 0},
+      |   ^
+ruclock.c:278:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:3: warning: braces around scalar initializer
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |   ^
+ruclock.c:279:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |    ^~~~~~~~~~~~~~~~~~~~~
+ruclock.c:279:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:31: warning: excess elements in scalar initializer
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |                               ^~~
+ruclock.c:279:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:36: warning: excess elements in scalar initializer
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:279:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:63: warning: excess elements in scalar initializer
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |                                                               ^
+ruclock.c:279:63: note: (near initialization for 'MODE_METAS')
+ruclock.c:279:3: warning: excess elements in scalar initializer
+  279 |   {DisEnable_U_LOW_POWER,     'u', "Disable Ultra-Low Power", 0},
+      |   ^
+ruclock.c:279:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:3: warning: braces around scalar initializer
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |   ^
+ruclock.c:280:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |    ^~~~~~~~~~~~~~~~~~
+ruclock.c:280:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:31: warning: excess elements in scalar initializer
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |                               ^~~
+ruclock.c:280:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:36: warning: excess elements in scalar initializer
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |                                    ^~~~~~~~~~~~~~~~~~
+ruclock.c:280:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:56: warning: excess elements in scalar initializer
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |                                                        ^
+ruclock.c:280:56: note: (near initialization for 'MODE_METAS')
+ruclock.c:280:3: warning: excess elements in scalar initializer
+  280 |   {DisEnable_Checksum,        'c', "Disable checksum", 0},
+      |   ^
+ruclock.c:280:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:3: warning: braces around scalar initializer
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |   ^
+ruclock.c:282:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:4: warning: initialization of 'const Telemetry_ModeMeta *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |    ^~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:282:4: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:31: warning: excess elements in scalar initializer
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |                               ^~~
+ruclock.c:282:31: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:36: warning: excess elements in scalar initializer
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |                                    ^~~~~~~~~~~~~~~~
+ruclock.c:282:36: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:54: warning: excess elements in scalar initializer
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |                                                      ^
+ruclock.c:282:54: note: (near initialization for 'MODE_METAS')
+ruclock.c:282:3: warning: excess elements in scalar initializer
+  282 |   {Report_current_settings,   '?', "Query settings", 0}
+      |   ^
+ruclock.c:282:3: note: (near initialization for 'MODE_METAS')
+ruclock.c:285:52: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  285 | const Telemetry_ModeMeta* get_mode_metadatas(void) {
+      |                                                    ^
+ruclock.c:289:38: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  289 | size_t get_mode_metadata_count(void) {
+      |                                      ^
+ruclock.c:293:75: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  293 | const Telemetry_ModeMeta* find_mode_metadata(Telemetry_Modes_type target) {
+      |                                                                           ^
+ruclock.c:303:36: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  303 | void test_get_mode_metadatas(void) {
+      |                                    ^
+ruclock.c:318:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  318 | {
+      | ^
+ruclock.c:354:33: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  354 | int synchronize_1pps_interface(){
+      |                                 ^
+ruclock.c:380:63: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  380 | int set_1pps_disciplining_time_constant(unsigned int seconds) {
+      |                                                               ^
+ruclock.c:400:45: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  400 | int query_1pps_disciplining_time_constant() {
+      |                                             ^
+ruclock.c:416:67: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  416 | int set_1pps_cable_length_compensation(int compensation_in_100ps) {
+      |                                                                   ^
+ruclock.c:433:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  433 | int query_1pps_cable_length_compensation(){
+      |                                           ^
+ruclock.c:448:49: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  448 | int latch_1pps_compensation_to_powerup_default(){
+      |                                                 ^
+ruclock.c:465:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  465 | {
+      | ^
+ruclock.c:506:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  506 | {
+      | ^
+ruclock.c:528:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  528 | {
+      | ^
+ruclock.c:551:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  551 | {
+      | ^
+ruclock.c:569:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  569 | {
+      | ^
+ruclock.c:590:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  590 | {
+      | ^
+ruclock.c:617:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  617 | {
+      | ^
+ruclock.c:643:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  643 | {
+      | ^
+ruclock.c:669:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  669 | {
+      | ^
+ruclock.c:689:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  689 | {
+      | ^
+ruclock.c:706:40: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  706 | int set_1pps_pulse_width(int multiple) {
+      |                                        ^
+ruclock.c:734:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  734 | {
+      | ^
+ruclock.c:770:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  770 | {
+      | ^
+ruclock.c:814:52: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  814 | char* get_last_two_chars(const char* str, int len) {
+      |                                                    ^
+ruclock.c:832:54: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  832 | int is_last_two_chars_crlf(const char* str, int len) {
+      |                                                      ^
+ruclock.c:843:69: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+  843 | int remove_end_crlf_in_string(const char *src, int len, char *dest) {
+      |                                                                     ^
+In file included from ruclock.c:5:
+ruclock.h:103:6: error: old-style parameter declarations in prototyped function definition
+  103 | void test_get_status_metadatas(void)
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~
+ruclock.c:848: error: expected '{' at end of input
+make: *** [<builtin>: ruclock.o] Error 1
