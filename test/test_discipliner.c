@@ -2,18 +2,37 @@
 #include <assert.h>
 #include <discipliner.h>
 #include <mock_ruclock.h>
+void test_status_failed_to_execute() {
+  // GPS 同步成功
+  mock_set_1PPS_sync_response("S");
 
-void test_enable_discipline_should_send_correct_command() {
-  assert(discipliner_is_ready_to_execute());
-}
-
-void test_enable_discipline_failed() {
+  // status = 1的不稳定状态
   mock_set_telemetry_response("1,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
   assert(!discipliner_is_ready_to_execute());
+
+  // status = 5的不稳定状态
+  mock_set_telemetry_response("5,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
+  assert(!discipliner_is_ready_to_execute());
+
+  // status = 0的稳定状态
+  mock_set_telemetry_response("0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
+  assert(discipliner_is_ready_to_execute());
+
+  printf("✅ UC1: CSAC lock check: PASS\n");
+}
+
+void test_1PPS_sync_failed_to_execute() {
+  mock_set_1PPS_sync_response("E");
+  assert(!discipliner_is_ready_to_execute());
+
+  mock_set_1PPS_sync_response("S");
+  assert(discipliner_is_ready_to_execute());
+
+  printf("✅ UC2: GPS 1PPS Sync: PASS\n");
 }
 
 void test_all_discipline_tests() {
-  test_enable_discipline_should_send_correct_command();
-  test_enable_discipline_failed();
-  printf("TEST ALL SUCCESSFULLY!\n");
+  test_status_failed_to_execute();
+  test_1PPS_sync_failed_to_execute();
+  printf("[TEST ALL SUCCESSFULLY!]\n");
 }
