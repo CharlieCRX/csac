@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include "mock_ruclock.h"
+extern void test_all_discipline_tests();
 int main() {
-  T_ruclock_telemetry telemetry;
-  get_telemetry_data(&telemetry);
+  test_all_discipline_tests();
   return 0;
 }

@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -I../ -I. -I../discipline -DUNIT_TEST
 
-SRCS = ../discipline/discipliner.c test_main.c mock_ruclock.c test_discipliner.c
+SRCS = ../discipline/discipliner.c test_discipliner.c mock_ruclock.c test_main.c 
 OBJS = $(SRCS:.c=.o)
 TARGET = test_ruclock
 
