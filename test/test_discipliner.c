@@ -31,8 +31,24 @@ void test_1PPS_sync_failed_to_execute() {
   printf("✅ UC2: GPS 1PPS Sync: PASS\n");
 }
 
+void test_set_and_query_constant_time() {
+  assert(discipliner_set_time_constant(100));
+  assert(discipliner_get_time_constant() == 100);
+  assert(discipliner_set_time_constant(10000));
+  assert(discipliner_get_time_constant() == 10000);
+  assert(!discipliner_set_time_constant(1));
+  assert(!discipliner_set_time_constant(9));
+  assert(!discipliner_set_time_constant(-1));
+  assert(!discipliner_set_time_constant(10001));
+
+  assert(discipliner_set_time_constant(199));
+  assert(discipliner_get_time_constant() == 199);
+  printf("✅ UC3: Set constant time: PASS\n");
+}
+
 void test_all_discipline_tests() {
   test_status_failed_to_execute();
   test_1PPS_sync_failed_to_execute();
-  printf("[TEST ALL SUCCESSFULLY!]\n");
+  test_set_and_query_constant_time();
+  printf("✅ [TEST ALL SUCCESSFULLY!]\n");
 }

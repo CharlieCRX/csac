@@ -11,10 +11,15 @@ const char *field_keys[] = {
   "TOD", "LTime", "Ver"
 };
 
+// Tool functions
+char* get_last_two_chars(const char* str, int len);
+int is_last_two_chars_crlf(const char* str, int len);
+int remove_end_crlf_in_string(const char *src, int len, char *dest);
 
 // 保存测试设置的模拟响应
 static char mock_telemetry_response[MAX_RESPONSE_SIZE] = "0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10";
 static char mock_1PPS_sync_response[MAX_RESPONSE_SIZE] = "S";
+static char mock_time_constant_response[MAX_RESPONSE_SIZE] = "10";
 
 int WRITE_READ_RUCLOCK(const char *command, char *response)
 {
@@ -28,6 +33,26 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     else if (strcmp(command, SYNC_1PPS) == 0) {
       strcpy(response, mock_1PPS_sync_response);
       return strlen(mock_1PPS_sync_response);
+    }
+
+    // 查询时间常数
+    else if (strcmp(command, QUERY_1PPS_TIME_CONST) == 0) {
+      strcpy(response, mock_time_constant_response);
+      return strlen(mock_time_constant_response);
+    }
+    
+    // D100, D300, D999 等模拟设置训练时间常数
+    else if (command[0] == '!' && command[1] == 'D') {
+      char src[MAX_RESPONSE_SIZE];
+      strcpy(src, command);
+
+      char dest[MAX_RESPONSE_SIZE];
+      remove_end_crlf_in_string(src, strlen(src), dest);
+      int seconds = atoi(&dest[2]);  // 提取数字部分
+      snprintf(response, MAX_RESPONSE_SIZE, "%d", seconds);
+
+      strncpy(mock_time_constant_response, response, MAX_RESPONSE_SIZE - 1);
+      return strlen(mock_time_constant_response);
     }
     return -1;
 }
@@ -116,4 +141,45 @@ void mock_set_telemetry_response(const char *resp) {
 void mock_set_1PPS_sync_response(const char *resp) {
   strncpy(mock_1PPS_sync_response, resp, MAX_RESPONSE_SIZE - 1);
   mock_1PPS_sync_response[MAX_RESPONSE_SIZE - 1] = '\0';
+}
+
+
+
+
+
+// Tools Function
+// 截取字符串末尾两个字符的函数
+char* get_last_two_chars(const char* str, int len) {
+  if (len < 2) {
+      return NULL;
+  }
+  // 为存储结果分配内存，包含字符串结束符
+  char* result = (char*)malloc(3 * sizeof(char));
+  if (result == NULL) {
+      return NULL;
+  }
+  // 复制末尾两个字符到结果字符串
+  result[0] = str[len - 2];
+  result[1] = str[len - 1];
+  result[2] = '\0';
+  return result;
+}
+
+
+// 比较字符串末尾两个字符和 CRLF 的函数
+int is_last_two_chars_crlf(const char* str, int len) {
+  char* last_two = get_last_two_chars(str, len);
+  if (last_two == NULL) {
+      return 0;
+  }
+  int is_equal = strcmp(last_two, CRLF) == 0;
+  free(last_two); // 释放动态分配的内存
+  return is_equal;
+}
+
+// 删除末尾的 CRLF 符号，并添加终止符
+int remove_end_crlf_in_string(const char *src, int len, char *dest) {
+  memcpy(dest, src, len);
+  dest[len - 2] = 0;
+  return len -2;
 }
