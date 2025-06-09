@@ -17,7 +17,6 @@
 #define MAX_RESPONSE_SIZE 256
 
 int MOC_WRITE_READ_RUCLOCK(const char *command, char *response);
-int get_current_value(const char *command, char *response);
 int get_telemetry_data(T_ruclock_telemetry *telemetry);
 
 #endif

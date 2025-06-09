@@ -20,31 +20,9 @@ int MOC_WRITE_READ_RUCLOCK(const char *command, char *response)
     // 模拟返回数据（可按不同命令做匹配）
     if (strcmp(command, TELEMETRY_DATA) == 0) {
       strcpy(response, mock_telemetry_response);
-      return 0;
+      return strlen(mock_telemetry_response);  // 返回 response 长度;
     }
     return -1;
-}
-
-int get_current_value(const char *command, char *response)
-{
-  int recv_n;
-  char recv_buf[MAX_RESPONSE_LENGTH];
-  char final_command[MAX_COMMAND_LENGTH];
-
-  // 构造查询命令
-  snprintf(final_command, sizeof(final_command), "!%s\r\n", command);
-  // 发送命令并接收响应
-  recv_n = MOC_WRITE_READ_RUCLOCK(final_command, recv_buf);  
-
-  // 检查是否接收到数据
-  if (recv_n <= 0) {
-      printf("recv is empty!\n");
-      return -1;
-  }
-
-  // 输出响应
-  strncpy(response, recv_buf, recv_n);
-  return 0;
 }
 
 
