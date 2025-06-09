@@ -17,6 +17,7 @@
 #define	TELEMETRY_DATA          "!^\r\n"
 #define SYNC_1PPS								"!S\r\n"
 #define QUERY_1PPS_TIME_CONST		"!D?\r\n"
+#define QUERY_PHASE_THRESHOLD		"!m?\r\n"
 #define MAX_RESPONSE_SIZE 256
 
 int WRITE_READ_RUCLOCK(const char *command, char *response);

@@ -12,4 +12,4 @@ $(TARGET): $(OBJS)
 	$(CC) -o $@ $(OBJS)
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f $(OBJS) $(TARGET)

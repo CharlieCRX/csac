@@ -20,6 +20,7 @@ int remove_end_crlf_in_string(const char *src, int len, char *dest);
 static char mock_telemetry_response[MAX_RESPONSE_SIZE] = "0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10";
 static char mock_1PPS_sync_response[MAX_RESPONSE_SIZE] = "S";
 static char mock_time_constant_response[MAX_RESPONSE_SIZE] = "10";
+static char mock_phase_threshold_response[MAX_RESPONSE_SIZE] = "20";
 
 int WRITE_READ_RUCLOCK(const char *command, char *response)
 {
@@ -53,6 +54,26 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
 
       strncpy(mock_time_constant_response, response, MAX_RESPONSE_SIZE - 1);
       return strlen(mock_time_constant_response);
+    }
+
+    // 查询相位阈值
+    else if (strcmp(command, QUERY_PHASE_THRESHOLD) == 0) {
+      strcpy(response, mock_phase_threshold_response);
+      return strlen(mock_phase_threshold_response);
+    }
+
+    // m10, m100, m200, 等模拟设置相位阈值
+    else if (command[0] == '!' && command[1] == 'm') {
+      char src[MAX_RESPONSE_SIZE];
+      strcpy(src, command);
+
+      char dest[MAX_RESPONSE_SIZE];
+      remove_end_crlf_in_string(src, strlen(src), dest);
+      int ns_threshold = atoi(&dest[2]);  // 提取数字部分
+      snprintf(response, MAX_RESPONSE_SIZE, "%d", ns_threshold);
+
+      strncpy(mock_phase_threshold_response, response, MAX_RESPONSE_SIZE - 1);
+      return strlen(mock_phase_threshold_response);
     }
     return -1;
 }

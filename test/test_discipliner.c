@@ -46,9 +46,25 @@ void test_set_and_query_constant_time() {
   printf("✅ UC3: Set constant time: PASS\n");
 }
 
+void test_set_and_query_phase_threshold() {
+  assert(discipliner_set_phase_threshold(1));
+  assert(discipliner_get_phase_threshold() == 1);
+  assert(discipliner_set_phase_threshold(255));
+  assert(discipliner_get_phase_threshold() == 255);
+  assert(discipliner_set_phase_threshold(199));
+  assert(discipliner_get_phase_threshold() == 199);
+
+  assert(!discipliner_set_phase_threshold(0));
+  assert(discipliner_set_phase_threshold(-1));
+  assert(discipliner_get_phase_threshold() == 255);
+
+  printf("✅ UC4: Set phase threshold: PASS\n");
+}
+
 void test_all_discipline_tests() {
   test_status_failed_to_execute();
   test_1PPS_sync_failed_to_execute();
   test_set_and_query_constant_time();
+  test_set_and_query_phase_threshold();
   printf("✅ [TEST ALL SUCCESSFULLY!]\n");
 }
