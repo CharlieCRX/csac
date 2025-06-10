@@ -62,10 +62,10 @@ void test_set_and_query_phase_threshold() {
 }
 
 void test_all_discipline_tests() {
-  printf("🩺 Running discipline tests...\n");
+  printf("\n🧪====================[ discipliner TEST START ]====================🧪\n");
   test_status_failed_to_execute();
   test_1PPS_sync_failed_to_execute();
   test_set_and_query_constant_time();
   test_set_and_query_phase_threshold();
-  printf("✅ All discipline tests passed!\n");
+  printf("✅====================[ discipliner TEST PASSED ]===================✅\n");
 }
