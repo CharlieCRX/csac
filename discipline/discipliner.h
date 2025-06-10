@@ -25,11 +25,26 @@ bool discipliner_enable(bool on);
  */
 bool discipliner_set_time_constant(uint16_t sec);
 
+/**
+ * @brief 获取 disciplining 的时间常数（单位：秒）
+ * @return seconds 范围 [10, 10000]
+ */
+uint16_t discipliner_get_time_constant();
+
 
 /**
- * @brief 设置判断同步成功的相位阈值（单位：ns）
+ * @brief 设置判断1PPS同步成功的相位阈值（单位：ns）
  * @param ns_threshold 范围 [1, 255]
  */
 bool discipliner_set_phase_threshold(uint8_t ns);
+
+
+/**
+ * @brief 获取1PPS同步成功的相位阈值（单位：ns）
+ * @return ns_threshold 范围 [1, 255]
+ */
+uint8_t discipliner_get_phase_threshold();
+
+
 bool discipliner_force_reinitialize();  // 强制重新开始 discipline（用于信号源恢复）
 #endif

@@ -20,16 +20,6 @@ int ruclock_init()
 }
 
 //通用的读写
-#ifdef UNIT_TEST
-int WRITE_READ_RUCLOCK(const char *command, char *response){
-  // 模拟返回数据（可按不同命令做匹配）
-  if (strcmp(command, TELEMETRY_DATA) == 0) {
-    strcpy(response, "0,0x0000,SN0001,0x0000,1234,1.00,1.50,9.60,1.340,34.0,0,---,---,-3,1,70000,70000,1.10");
-    return 0;
-  }
-  return -1;
-}
-#else
 int WRITE_READ_RUCLOCK(const char *command, char *response)
 {
   int recv_n;
@@ -68,7 +58,6 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
 
   return len;
 }
-#endif
 
 int get_current_value(const char *command, char *response)
 {
