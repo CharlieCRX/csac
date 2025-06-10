@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <discipliner.h>
-#include <mock_ruclock.h>
+#include <mock_csac_interfac.h>
 void test_status_failed_to_execute() {
   // GPS 同步成功
   mock_set_1PPS_sync_response("S");

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-#include "../ruclock_utils.h"
+#include <csac_utils.h>
 
 void test_format_ruclock_command() {
     char buffer[64];

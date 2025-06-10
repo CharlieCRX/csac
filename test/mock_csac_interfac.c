@@ -1,9 +1,9 @@
-#include "mock_ruclock.h"
+#include "mock_csac_interfac.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "ruclock_macros.h"
+#include "csac_macros.h"
 // 定义字段名数组（按你提供的顺序）
 const char *field_keys[] = {
   "Status", "Alarm", "SN", "Mode", "Contrast",
@@ -12,18 +12,13 @@ const char *field_keys[] = {
   "TOD", "LTime", "Ver"
 };
 
-// Tool functions
-char* get_last_two_chars(const char* str, int len);
-int is_last_two_chars_crlf(const char* str, int len);
-int remove_end_crlf_in_string(const char *src, int len, char *dest);
-
 // 保存测试设置的模拟响应
 static char mock_telemetry_response[MAX_RESPONSE_LENGTH] = "0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10";
 static char mock_1PPS_sync_response[MAX_RESPONSE_LENGTH] = "S";
 static char mock_time_constant_response[MAX_RESPONSE_LENGTH] = "10";
 static char mock_phase_threshold_response[MAX_RESPONSE_LENGTH] = "20";
 
-int WRITE_READ_RUCLOCK(const char *command, char *response)
+int csac_send_command(const char *command, char *response)
 {
     // 模拟返回数据（可按不同命令做匹配）
     if (strcmp(command, TELEMETRY_DATA) == 0) {
@@ -96,7 +91,7 @@ int get_telemetry_para(T_ruclock_telemetry *telemetry_param)
   int num_fields = 0; // 记录字段数量
    
 
-  recv_n = WRITE_READ_RUCLOCK(TELEMETRY_DATA, recv_buf);
+  recv_n = csac_send_command(TELEMETRY_DATA, recv_buf);
   if(recv_n < 0)
   {
     return -1;
@@ -158,45 +153,4 @@ void mock_set_telemetry_response(const char *resp) {
 void mock_set_1PPS_sync_response(const char *resp) {
   strncpy(mock_1PPS_sync_response, resp, MAX_RESPONSE_LENGTH - 1);
   mock_1PPS_sync_response[MAX_RESPONSE_LENGTH - 1] = '\0';
-}
-
-
-
-
-
-// Tools Function
-// 截取字符串末尾两个字符的函数
-char* get_last_two_chars(const char* str, int len) {
-  if (len < 2) {
-      return NULL;
-  }
-  // 为存储结果分配内存，包含字符串结束符
-  char* result = (char*)malloc(3 * sizeof(char));
-  if (result == NULL) {
-      return NULL;
-  }
-  // 复制末尾两个字符到结果字符串
-  result[0] = str[len - 2];
-  result[1] = str[len - 1];
-  result[2] = '\0';
-  return result;
-}
-
-
-// 比较字符串末尾两个字符和 CRLF 的函数
-int is_last_two_chars_crlf(const char* str, int len) {
-  char* last_two = get_last_two_chars(str, len);
-  if (last_two == NULL) {
-      return 0;
-  }
-  int is_equal = strcmp(last_two, CRLF) == 0;
-  free(last_two); // 释放动态分配的内存
-  return is_equal;
-}
-
-// 删除末尾的 CRLF 符号，并添加终止符
-int remove_end_crlf_in_string(const char *src, int len, char *dest) {
-  memcpy(dest, src, len);
-  dest[len - 2] = 0;
-  return len -2;
 }

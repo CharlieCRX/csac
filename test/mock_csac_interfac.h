@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "enums.h"
 
-int WRITE_READ_RUCLOCK(const char *command, char *response);
+int csac_send_command(const char *command, char *response);
 int get_telemetry_data(T_ruclock_telemetry *telemetry);
 
 
