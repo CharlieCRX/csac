@@ -27,6 +27,7 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
   int len = 0, iRet = 0;
   time_t start_time = time(NULL);
   char recv_buf[MAX_RESPONSE_LENGTH] = {0};
+  char format_command[MAX_RESPONSE_LENGTH] = {0};
   // 串口初始化
   uart_exit(UART2);
   iRet = uart_init(UART2);
@@ -34,11 +35,11 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     return iRet;
   }
   // 格式化命令
-  format_ruclock_command(command, recv_buf, sizeof(recv_buf));
+  format_ruclock_command(command, format_command, sizeof(format_command));
 
   // 发送命令
-  uart_send(UART2, (const unsigned char *)command, strlen(command));
-  DEBUG_LOG("command: %s", command);
+  uart_send(UART2, (const unsigned char *)format_command, strlen(format_command));
+  DEBUG_LOG("format_command: %s", format_command);
 
   // 获取响应
   do {
