@@ -5,6 +5,7 @@
 #include "ruclock.h"
 #include "uart.h"
 #include "ruclock_macros.h"
+#include "ruclock_utils.h"
 
 // 定义字段名数组（按你提供的顺序）
 const char *field_keys[] = {
@@ -32,6 +33,8 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
   if(iRet!=0) {
     return iRet;
   }
+  // 格式化命令
+  format_ruclock_command(command, recv_buf, sizeof(recv_buf));
 
   // 发送命令
   DEBUG_LOG("command: %s", command);
@@ -47,13 +50,13 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
 
     recv_n = uart_recv(UART2, (unsigned char *)(recv_buf + len), sizeof(recv_buf) - len);
     // 检查响应的合法性
-    if (is_last_two_chars_crlf(recv_buf, len)) {
+    if (ends_with_crlf(recv_buf, len)) {
       break;
     }
     if(recv_n > 0) len += recv_n;
   } while(1);
 
-  len = remove_end_crlf_in_string(recv_buf, len, response);
+  len = sanitize_ruclock_response(recv_buf, len, response);
   DEBUG_LOG("RESPONSE: len = %d, response = {%s}\n", len, response);
 
   return len;

@@ -13,16 +13,7 @@ int format_ruclock_command(const char *raw_cmd, char *full_cmd, size_t bufsize)
     return 0;
 }
 
-/**
- * @brief 判断字符串是否以 "\n\n" 结尾
- *
- * 内部函数，不导出。用于辅助识别铷钟响应的结束符。
- *
- * @param buf 输入字符串缓冲区
- * @param len 输入字符串长度
- * @return 1 表示以 "\n\n" 结尾，0 表示不是
- */
-static int ends_with_crlf(const char *buf, int len)
+int ends_with_crlf(const char *buf, int len)
 {
     return (len >= 2 && buf[len - 2] == '\n' && buf[len - 1] == '\n');
 }

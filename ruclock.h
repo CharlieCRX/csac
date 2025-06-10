@@ -5,6 +5,7 @@
 #include "enums.h"
 int ruclock_init();
 int get_current_value(const char *command, char *response);
+int WRITE_READ_RUCLOCK(const char *command, char *response);
 
 // 比较字符串末尾两个字符和 CRLF 的函数
 int is_last_two_chars_crlf(const char* str, int len);

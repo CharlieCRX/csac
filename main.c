@@ -62,7 +62,7 @@ static int parse_args(int argc, char *argv[]) {
 void perform_read_operation(const char *command)
 {
   char response[MAX_RESPONSE_LENGTH] = {0};
-  get_current_value(command, response);
+  WRITE_READ_RUCLOCK(command, response);
 }
 
 
