@@ -37,7 +37,7 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
   // 格式化命令
   format_ruclock_command(command, format_command, sizeof(format_command));
 
-  // 发送命令
+  // 发送格式化后的命令
   uart_send(UART2, (const unsigned char *)format_command, strlen(format_command));
   DEBUG_LOG("format_command: %s", format_command);
 
@@ -57,6 +57,7 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     if(recv_n > 0) len += recv_n;
   } while(1);
 
+  // 清洁响应数据
   len = sanitize_ruclock_response(recv_buf, len, response);
   DEBUG_LOG("RESPONSE: len = %d, response = {%s}\n", len, response);
 
