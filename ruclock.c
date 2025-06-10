@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "ruclock.h"
 #include "uart.h"
-
+#include "ruclock_macros.h"
 
 // 定义字段名数组（按你提供的顺序）
 const char *field_keys[] = {
@@ -284,71 +284,6 @@ int set_operating_modes(Telemetry_Modes_type type)
   return ret;
 }
 
-
-/*** 1PPS 相关操作 */
-
-
-/**
- @description:同步1PPS接口
- @return:0同步失败，1同步成功；-1接口调用失败；
-*/
-int synchronize_1pps_interface(){
-  char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)SYNC_1PPS, response);
-
-  if (len < 0) {
-    ERR_LOG("synchronize_1pps_interface failed\n");
-    return -1;
-  }
-  char sync_success[] = "S";
-  char sync_timeout[] = "E";
-
-  if (strcmp(response, sync_success) == 0) {
-    return 1;
-  } else if (strcmp(response, sync_timeout) == 0) {
-    return 0;
-  } else {
-    return -1;
-  }
-}
-
-
-/**
- @description:设置 1PPS 校准时间常数
- @param:  10 到 10000 秒
- @return:返回校准后的时间常数； -1调用接口失败；
-*/
-int set_1pps_disciplining_time_constant(unsigned int seconds) {
-  char command[COMMAND_LENGTH];
-  char response[RESPONSE_LENGTH];
-  snprintf(command, sizeof(command), "!%c%d\r\n", 'D', seconds);
-
-  int len = WRITE_READ_RUCLOCK(command, response);  
-
-  if(len < 0) {
-    ERR_LOG("set_1pps_disciplining_time_constant is failed!\n");
-    return -1;
-  }
-  // 输出响应
-  DEBUG_LOG("Unit response: %s\n", response);
-  return atoi(response);
-}
-
-/**
- @description:查询 1PPS 的校准时间常数
- @return:返回当前的时间常数; -1调用接口失败；
-*/
-int query_1pps_disciplining_time_constant() {
-  char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)QUERY_1PPS_TIME_CONST, response);
-  if (len < 0) {
-    ERR_LOG("query_1pps_disciplining_time_constant is failed!\n");
-    return -1;
-  }
-  DEBUG_LOG("Unit response: %s\n", response);
-  return atoi(response);
-}
-
 /**
  @description:设置 1PPS 校准电缆长度补偿
  @param:输入的补偿值以 100 ps 为单位，最大绝对值为 1000（对应 100 ns）
@@ -398,71 +333,6 @@ int latch_1pps_compensation_to_powerup_default(){
     return 1;
   }
   return 0;
-}
-
-
-//(deleted) Synchronize 1PPS: 
-/*
-int sync_CSAC_to_external(void)
-{
-  int recv_n;
-  int len = 0, iRet = 0;
-  int flag = 0;
-  char recv_buf[MAX_RESPONSE_LENGTH];
-  char expected_response[] = "S\r\n";
-  char timeout_response[] = "E\r\n";
-  int times = 30;// 每次等待100毫秒，所以总共等待3000毫秒，即3秒
-  uart_exit(UART2);
-  
-  iRet = uart_init(UART2);
-  if(iRet!=0){
-    ERR_LOG("uart2 init failed!\n");
-  }
-  uart_send(UART2, (const unsigned char *)TELEMETRY_SYNC, strlen(TELEMETRY_SYNC));
-  do {
-        recv_n = uart_recv(UART2, (unsigned char *)(recv_buf + len), sizeof(recv_buf) - len);
-        len += recv_n;
-    // 检查是否接收到 "\r\n"
-        if (strstr(recv_buf, expected_response) != NULL) {
-            flag = 1;
-            break;
-        } else if (strstr(recv_buf, timeout_response) != NULL) {
-            return -2;//表示超时
-        }
-        if (flag) {
-            break;
-        }
-        if (times-- <= 0) {
-            printf("timeout: didn't receive \\r\\n\n");
-            return -3;
-        }
-        // 等待一段时间再进行下一次接收
-        usleep(100000); // 100ms
-  } while (1);
-
-  return 0;
-}
-*/
-
-//Set 1PPS Disciplining Time Constant
-int set_pps_time_constant(uint16_t time)
-{
-  char command[COMMAND_LENGTH];  // 命令字符串长度
-  char response[RESPONSE_LENGTH]; // 响应字符串长度
-  int recv_n;
-
-  snprintf(command, sizeof(command), "!%c%d\r\n", 'D', time);
-
-  recv_n = WRITE_READ_RUCLOCK(command, response);  
-
-  if(recv_n <= 0){
-    printf("recv is empty!\n");
-    return -1;
-  }
-  // 输出响应
-    printf("Unit response: %s\n", response);
-
-    return 0;
 }
 
 //Set 1PPS Disciplining Cable Length Compensation

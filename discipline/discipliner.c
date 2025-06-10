@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "discipliner.h"
 #include "mock_ruclock.h"
+#include "ruclock_macros.h"
 
 // Helper function
 bool is_CSAC_status_ready();

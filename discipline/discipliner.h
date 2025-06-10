@@ -3,6 +3,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#define SYNC_1PPS								"!S\r\n"
+#define QUERY_1PPS_TIME_CONST		"!D?\r\n"
+#define QUERY_PHASE_THRESHOLD		"!m?\r\n"
 /**
  * @brief 检查是否可以进行驯服
  * 满足的条件：

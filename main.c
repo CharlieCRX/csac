@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <getopt.h>
 #include "ruclock.h"
+#include "ruclock_macros.h"
 #include "metadata.h"
 
 static int parse_args(int argc, char *argv[]);
