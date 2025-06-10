@@ -6,7 +6,8 @@ OBJS = $(SRCS:.c=.o)
 TARGET = test_ruclock
 
 all: $(TARGET)
-	 ./$(TARGET)  # 编译后立即运行
+	@ rm -f $(OBJS) # 清理中间文件
+	@ ./$(TARGET)  # 编译后立即运行
 
 $(TARGET): $(OBJS)
 	$(CC) -o $@ $(OBJS)
