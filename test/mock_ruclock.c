@@ -32,13 +32,13 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     }
 
     // 1PPS同步
-    else if (strcmp(command, SYNC_1PPS) == 0) {
+    else if (strcmp(command, SYNC_1PPS_MANUAL) == 0) {
       strcpy(response, mock_1PPS_sync_response);
       return strlen(mock_1PPS_sync_response);
     }
 
     // 查询时间常数
-    else if (strcmp(command, QUERY_1PPS_TIME_CONST) == 0) {
+    else if (strcmp(command, DISC_QUERY_TIME_CONST) == 0) {
       strcpy(response, mock_time_constant_response);
       return strlen(mock_time_constant_response);
     }
@@ -58,7 +58,7 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     }
 
     // 查询相位阈值
-    else if (strcmp(command, QUERY_PHASE_THRESHOLD) == 0) {
+    else if (strcmp(command, DISC_QUERY_PHASE_THRESHOLD) == 0) {
       strcpy(response, mock_phase_threshold_response);
       return strlen(mock_phase_threshold_response);
     }

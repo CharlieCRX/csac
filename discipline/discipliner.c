@@ -47,7 +47,7 @@ bool discipliner_set_time_constant(uint16_t sec)
 uint16_t discipliner_get_time_constant()
 {
   char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)QUERY_1PPS_TIME_CONST, response);
+  int len = WRITE_READ_RUCLOCK((const char *)DISC_QUERY_TIME_CONST, response);
   if (len < 0) {
     ERR_LOG("[IO ERROR]:query_1pps_disciplining_time_constant is failed!\n");
     return false;
@@ -78,7 +78,7 @@ bool discipliner_set_phase_threshold(uint8_t ns)
 uint8_t discipliner_get_phase_threshold()
 {
   char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)QUERY_PHASE_THRESHOLD, response);
+  int len = WRITE_READ_RUCLOCK((const char *)DISC_QUERY_PHASE_THRESHOLD, response);
   if (len < 0) {
     ERR_LOG("[IO ERROR]:query_1pps_disciplining_time_constant is failed!\n");
     return false;
@@ -100,7 +100,7 @@ bool is_CSAC_status_ready()
 bool is_1PPS_EXT_ready()
 {
   char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)SYNC_1PPS, response);
+  int len = WRITE_READ_RUCLOCK((const char *)SYNC_1PPS_MANUAL, response);
 
   if (len < 0) {
     return false;

@@ -308,7 +308,7 @@ int set_1pps_cable_length_compensation(int compensation_in_100ps) {
 */
 int query_1pps_cable_length_compensation(){
   char response[RESPONSE_LENGTH];
-  int len = WRITE_READ_RUCLOCK((const char *)QUERY_1PPS_CABLE_LEN, response);
+  int len = WRITE_READ_RUCLOCK((const char *)DISC_QUERY_CABLE_LEN, response);
   if (len < 0) {
     ERR_LOG("query_1pps_cable_length_compensation is failed!\n");
     return -1;
@@ -324,7 +324,7 @@ int query_1pps_cable_length_compensation(){
 int latch_1pps_compensation_to_powerup_default(){
   char response[RESPONSE_LENGTH];
   char valid_response[] = "Phase comp latched";
-  int len = WRITE_READ_RUCLOCK((const char *)LATCH_1PPS_CABLE_LEN, response);
+  int len = WRITE_READ_RUCLOCK((const char *)DISC_LATCH_CABLE_LEN, response);
   if (len < 0) {
     ERR_LOG("query_1pps_cable_length_compensation is failed!\n");
     return -1;

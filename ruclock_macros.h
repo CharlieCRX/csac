@@ -35,11 +35,11 @@
 #define TELEMETRY_SYNC          "!S\r\n"
 #define TELEMETRY_HELP          "!?\r\n"
 
-#define SYNC_1PPS								"!S\r\n"
-#define QUERY_1PPS_TIME_CONST		"!D?\r\n"
-#define QUERY_PHASE_THRESHOLD		"!m?\r\n"
-#define QUERY_1PPS_CABLE_LEN		"!DC?\r\n"
-#define LATCH_1PPS_CABLE_LEN		"!DCL\r\n"
+#define SYNC_1PPS_MANUAL			          "!S\r\n"
+#define DISC_QUERY_TIME_CONST		        "!D?\r\n"
+#define DISC_QUERY_PHASE_THRESHOLD		  "!m?\r\n"
+#define DISC_QUERY_CABLE_LEN		        "!DC?\r\n"
+#define DISC_LATCH_CABLE_LEN		        "!DCL\r\n"
 
 
 #endif // RUCLOCK_MACROS_H
