@@ -22,24 +22,24 @@
 #define	RESPONSE_LENGTH 20
 #define	MAX_FIELDS 17
 
-#define	TELEMETRY_HEAD          "!6\r\n"
-#define	TELEMETRY_DATA          "!^\r\n"
+#define	TELEMETRY_HEAD          "6"
+#define	TELEMETRY_DATA          "^"
 #define	TELEMETRY_SET_FREQ_A    "FA"
 #define	TELEMETRY_SET_FREQ_D    "FD"
 #define	TELEMETRY_
-#define	TELEMETRY_GET_FREQ      "!F?\r\n"
-#define	TELEMETRY_LATCH_FREQ    "!FL\r\n"
-#define	TELEMETRY_LATCH_DC      "!DCL\r\n"
+#define	TELEMETRY_GET_FREQ      "F?"
+#define	TELEMETRY_LATCH_FREQ    "FL"
+#define	TELEMETRY_LATCH_DC      "DCL"
 
 
-#define TELEMETRY_SYNC          "!S\r\n"
-#define TELEMETRY_HELP          "!?\r\n"
+#define TELEMETRY_SYNC          "S"
+#define TELEMETRY_HELP          "?"
 
-#define SYNC_1PPS_MANUAL			          "!S\r\n"
-#define DISC_QUERY_TIME_CONST		        "!D?\r\n"
-#define DISC_QUERY_PHASE_THRESHOLD		  "!m?\r\n"
-#define DISC_QUERY_CABLE_LEN		        "!DC?\r\n"
-#define DISC_LATCH_CABLE_LEN		        "!DCL\r\n"
+#define SYNC_1PPS_MANUAL              "S"
+#define DISC_QUERY_TIME_CONST         "D?"
+#define DISC_QUERY_PHASE_THRESHOLD    "m?"
+#define DISC_QUERY_CABLE_LEN          "DC?"
+#define DISC_LATCH_CABLE_LEN          "DCL"
 
 
 #endif // RUCLOCK_MACROS_H

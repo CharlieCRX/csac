@@ -3,13 +3,8 @@
 #include <stdint.h>
 #include <pthread.h>
 #include "enums.h"
-int ruclock_init();
-int get_current_value(const char *command, char *response);
-int WRITE_READ_RUCLOCK(const char *command, char *response);
 
-// 比较字符串末尾两个字符和 CRLF 的函数
-int is_last_two_chars_crlf(const char* str, int len);
-int remove_end_crlf_in_string(const char *src, int len, char *dest);
+int WRITE_READ_RUCLOCK(const char *command, char *response);
 
 /**				接口信息     */
 /* 遥测数据*/

@@ -32,9 +32,9 @@ bool discipliner_set_time_constant(uint16_t sec)
 
   char command[COMMAND_LENGTH];
   char response[RESPONSE_LENGTH];
-  snprintf(command, sizeof(command), "!%c%d" CRLF, 'D', sec);
+  snprintf(command, sizeof(command), "%c%d", 'D', sec);
 
-  int len = WRITE_READ_RUCLOCK(command, response);  
+  int len = WRITE_READ_RUCLOCK(command, response);
 
   if(len < 0) {
     ERR_LOG("[IO ERROR]:discipliner_set_time_constant is failed!\n");
@@ -63,7 +63,7 @@ bool discipliner_set_phase_threshold(uint8_t ns)
 
   char command[COMMAND_LENGTH];
   char response[RESPONSE_LENGTH];
-  snprintf(command, sizeof(command), "!%c%d" CRLF, 'm', ns);
+  snprintf(command, sizeof(command), "%c%d", 'm', ns);
 
   int len = WRITE_READ_RUCLOCK(command, response);  
 

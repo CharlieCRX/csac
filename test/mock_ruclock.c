@@ -44,13 +44,11 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     }
     
     // D100, D300, D999 等模拟设置训练时间常数
-    else if (command[0] == '!' && command[1] == 'D') {
+    else if (command[0] == 'D') {
       char src[MAX_RESPONSE_LENGTH];
       strcpy(src, command);
 
-      char dest[MAX_RESPONSE_LENGTH];
-      remove_end_crlf_in_string(src, strlen(src), dest);
-      int seconds = atoi(&dest[2]);  // 提取数字部分
+      int seconds = atoi(&src[1]);  // 提取数字部分
       snprintf(response, MAX_RESPONSE_LENGTH, "%d", seconds);
 
       strncpy(mock_time_constant_response, response, MAX_RESPONSE_LENGTH - 1);
@@ -64,13 +62,10 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
     }
 
     // m10, m100, m200, 等模拟设置相位阈值
-    else if (command[0] == '!' && command[1] == 'm') {
+    else if (command[0] == 'm') {
       char src[MAX_RESPONSE_LENGTH];
       strcpy(src, command);
-
-      char dest[MAX_RESPONSE_LENGTH];
-      remove_end_crlf_in_string(src, strlen(src), dest);
-      int ns_threshold = atoi(&dest[2]);  // 提取数字部分
+      int ns_threshold = atoi(&src[1]);  // 提取数字部分
       snprintf(response, MAX_RESPONSE_LENGTH, "%d", ns_threshold);
 
       strncpy(mock_phase_threshold_response, response, MAX_RESPONSE_LENGTH - 1);

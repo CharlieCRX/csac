@@ -37,8 +37,8 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
   format_ruclock_command(command, recv_buf, sizeof(recv_buf));
 
   // 发送命令
-  DEBUG_LOG("command: %s", command);
   uart_send(UART2, (const unsigned char *)command, strlen(command));
+  DEBUG_LOG("command: %s", command);
 
   // 获取响应
   do {
@@ -60,28 +60,6 @@ int WRITE_READ_RUCLOCK(const char *command, char *response)
   DEBUG_LOG("RESPONSE: len = %d, response = {%s}\n", len, response);
 
   return len;
-}
-
-int get_current_value(const char *command, char *response)
-{
-  int recv_n;
-  char recv_buf[MAX_RESPONSE_LENGTH];
-  char final_command[MAX_COMMAND_LENGTH];
-
-  // 构造查询命令
-  snprintf(final_command, sizeof(final_command), "!%s\r\n", command);
-  // 发送命令并接收响应
-  recv_n = WRITE_READ_RUCLOCK(final_command, recv_buf);  
-
-  // 检查是否接收到数据
-  if (recv_n <= 0) {
-      printf("recv is empty!\n");
-      return -1;
-  }
-
-  // 输出响应
-  strncpy(response, recv_buf, recv_n);
-  return 0;
 }
 
 
@@ -409,7 +387,7 @@ int get_power_parameter(int32_t *sleep_time, int32_t *wake_time)
   int num_fields = 0; // 记录字段数量
   int recv_n;
 
-  recv_n = get_current_value("U", response);  
+  recv_n = WRITE_READ_RUCLOCK("U", response);  
   if(recv_n <= 0){
     printf("recv is empty!\n");
     return -1;
@@ -506,7 +484,7 @@ int get_1PPs_Threshold(int *current_threshold)
   char response[RESPONSE_LENGTH]; // 响应字符串长度
   int recv_n;
 
-  recv_n = get_current_value("m", response);  
+  recv_n = WRITE_READ_RUCLOCK("m", response);  
   if(recv_n <= 0){
     printf("recv is empty!\n");
     return -1;
@@ -552,7 +530,7 @@ int get_1pps_pulse_width(int *multiple)
   int recv_n;
   char width_str[10];
 
-  recv_n = get_current_value(">", response);  
+  recv_n = WRITE_READ_RUCLOCK(">", response);  
   if(recv_n <= 0){
     printf("recv is empty!\n");
     return -1;
