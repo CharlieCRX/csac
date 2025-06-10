@@ -5,7 +5,7 @@
 #include "ruclock.h"
 #include "uart.h"
 #include "ruclock_macros.h"
-#include "ruclock_utils.h"
+#include <ruclock_utils.h>
 
 // 定义字段名数组（按你提供的顺序）
 const char *field_keys[] = {
@@ -244,7 +244,7 @@ int set_operating_modes(Telemetry_Modes_type type)
   char response[RESPONSE_LENGTH]; // 响应字符串长度
   int recv_n;
 
-  snprintf(command, sizeof(command), "!%c%c\r\n", 'M', type);
+  snprintf(command, sizeof(command), "%c%c", 'M', type);
 
   recv_n = WRITE_READ_RUCLOCK(command, response);  
 

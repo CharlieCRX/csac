@@ -17,6 +17,11 @@ bool discipliner_is_ready_to_execute();
  */
 bool discipliner_enable(bool on);
 
+/**
+ * @brief 判断是否启用 GPS disciplining 模式
+ */
+bool discipliner_is_enable();
+
 
 /**
  * @brief 设置 disciplining 的时间常数（单位：秒）

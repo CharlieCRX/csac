@@ -24,6 +24,11 @@ bool discipliner_enable(bool on)
   return false;
 }
 
+bool discipliner_is_enable()
+{
+  return false;
+}
+
 bool discipliner_set_time_constant(uint16_t sec)
 {
   if (sec < 10 || sec > 10000) {
