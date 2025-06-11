@@ -41,8 +41,6 @@ $(TARGET_NAME): $(OBJ_FILES)
 	@echo "[build] Linking target $(TARGET_NAME)..."
 	$(CC) $(CFLAGS) $^ -o $@
 	@echo "[version] Embedding version info..."
-	@echo "#define COLLECT_VERSION \"$(PKG_VERSION)-build$(PKG_BUILD_TIME)\"" > version.h
-	@echo "$(PKG_VERSION)-build$(PKG_BUILD_TIME)" > ruclock_ver
 	@echo "[build] Target $(TARGET_NAME) built successfully!"
 	@rm -f $(OBJ_FILES)
 	@echo "[build] Cleaning up object files..."
@@ -55,7 +53,7 @@ $(TARGET_NAME): $(OBJ_FILES)
 
 clean:
 	@echo "[clean] Cleaning all build artifacts..."
-	rm -f $(OBJ_FILES) $(TARGET_NAME) version.h ruclock_ver
+	rm -f $(OBJ_FILES) $(TARGET_NAME)
 	rm -f test/$(TARGET_NAME) test/*.o
 
 .PHONY: clean install
