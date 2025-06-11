@@ -113,8 +113,9 @@ out:
 int uart_exit(const int id)
 {
   CHECK_ID(id)
-  if(s_uart_dev[id].fd != -1)
+  if(s_uart_dev[id].fd != -1) {
     close(s_uart_dev[id].fd);
+  }
     s_uart_dev[id].fd = -1;
   return 0;
 }

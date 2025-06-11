@@ -1,4 +1,4 @@
-TARGET_NAME = ruclock
+TARGET_NAME := ruclock
 PKG_VERSION := 1.3.1
 PKG_BUILD_TIME = $(shell date "+%Y%m%d")
 
@@ -26,33 +26,35 @@ LIB_DIR = lib/comm_protocol
 
 # 查找所有源文件
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
-# DISCIPLINE_SRC := $(wildcard $(SRC_DIR)/discipline/*.c)
 UTILS_SRC := $(wildcard $(SRC_DIR)/utils/*.c)
 COMM_PROTOCOL_SRC := $(wildcard $(LIB_DIR)/*.c)
 
 # 所有源文件列表
-ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC) #$(DISCIPLINE_SRC)
+ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC)
 
 # 生成对应的目标文件列表
 OBJ_FILES := $(patsubst %.c, %.o, $(ALL_SRC_FILES))
 
 # 构建目标
 $(TARGET_NAME): $(OBJ_FILES)
-  @echo "[build] Linking target $(TARGET_NAME)..."
-  $(CC) $(CFLAGS) $^ -o $@
-  @echo "[version] Embedding version info..."
-  @echo "[build] Target $(TARGET_NAME) built successfully!"
-  @rm -f $(OBJ_FILES)
-  @echo "[build] Cleaning up object files..."
-  @echo "[build] Build complete."
+	@echo "[build] Linking target $(TARGET_NAME)..."
+	$(CC) $(CFLAGS) $^ -o $@
+	@echo "[version] Embedding version info..."
+	@echo "#define COLLECT_VERSION \"$(PKG_VERSION)-build$(PKG_BUILD_TIME)\"" > version.h
+	@echo "$(PKG_VERSION)-build$(PKG_BUILD_TIME)" > ruclock_ver
+	@echo "[build] Target $(TARGET_NAME) built successfully!"
+	@rm -f $(OBJ_FILES)
+	@echo "[build] Cleaning up object files..."
+	@echo "[build] Build complete."
+
 # 模式规则编译所有源文件
 %.o: %.c
-  @mkdir -p $(@D)
-  $(CC) $(CFLAGS) -c $< -o $@
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-  @echo "[clean] Cleaning all build artifacts..."
-  rm -f $(OBJ_FILES) $(TARGET_NAME)
-  rm -f test/$(TARGET_NAME) test/*.o
+	@echo "[clean] Cleaning all build artifacts..."
+	rm -f $(OBJ_FILES) $(TARGET_NAME) version.h ruclock_ver
+	rm -f test/$(TARGET_NAME) test/*.o
 
 .PHONY: clean install
