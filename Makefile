@@ -27,7 +27,7 @@ LIB_DIR = lib/comm_protocol
 # 查找所有源文件
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 UTILS_SRC := $(wildcard $(SRC_DIR)/utils/*.c)
-TELEMETRY_SRC := $(wildcard $(SRC_DIR)/telemetry_info/*.c)
+TELEMETRY_SRC := $(wildcard $(SRC_DIR)/telemetry/*.c)
 COMM_PROTOCOL_SRC := $(wildcard $(LIB_DIR)/*.c)
 
 # 所有源文件列表

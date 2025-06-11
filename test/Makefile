@@ -15,7 +15,7 @@ MOCK_SRCS = \
 SRC_SRCS = \
     ../src/discipline/discipliner.c \
     ../src/utils/csac_utils.c\
-		../src/telemetry_info/telemetry_query.c
+		../src/telemetry/telemetry_query.c
 
 ALL_SRCS = $(TEST_SRCS) $(MOCK_SRCS) $(SRC_SRCS)
 
