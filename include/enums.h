@@ -62,7 +62,7 @@ typedef struct CSAC_telemetry{
   uint32_t TOD;             // Time (seconds)
   uint32_t LTime;           // Time since lock (seconds)
   char fwVer[5];            // Firmware version
-}T_CSAC_telemetry;
+} T_CSAC_telemetry;
 
 typedef enum {
   Telemetry_Headers           = '6',
