@@ -20,7 +20,7 @@
 #define  MAX_RESPONSE_LENGTH 500
 #define  COMMAND_LENGTH 20
 #define  RESPONSE_LENGTH 20
-#define  MAX_FIELDS 17
+#define  MAX_FIELDS 20
 
 #define  TELEMETRY_HEAD          "6"
 #define  TELEMETRY_DATA          "^"

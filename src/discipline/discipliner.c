@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "discipliner.h"
+#include "telemetry_query.h"
 #ifdef UNIT_TEST
 #include "mock_csac_interfac.h"
 #else

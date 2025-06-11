@@ -13,7 +13,7 @@ endif
 
 # 编译器选项
 CFLAGS  := -static -Wall -std=gnu99 -fPIC -g
-CFLAGS += -I./include -I./lib/comm_protocol -I./src
+CFLAGS += -I./include -I./lib/comm_protocol
 
 # 加入 debug 宏处理
 ifeq ($(DEBUG), 1)
@@ -27,10 +27,11 @@ LIB_DIR = lib/comm_protocol
 # 查找所有源文件
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 UTILS_SRC := $(wildcard $(SRC_DIR)/utils/*.c)
+TELEMETRY_SRC := $(wildcard $(SRC_DIR)/telemetry_info/*.c)
 COMM_PROTOCOL_SRC := $(wildcard $(LIB_DIR)/*.c)
 
 # 所有源文件列表
-ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC)
+ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC) $(TELEMETRY_SRC)
 
 # 生成对应的目标文件列表
 OBJ_FILES := $(patsubst %.c, %.o, $(ALL_SRC_FILES))
