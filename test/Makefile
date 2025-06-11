@@ -1,54 +1,53 @@
 # test/Makefile
+
 CC = gcc
-CFLAGS = -Wall -I../include -I../lib/comm_protocol -I../src -I. -DUNIT_TEST
+CFLAGS = -Wall -I../include -I../lib/comm_protocol -I../src -I./mocks -DUNIT_TEST
+BUILD_DIR = build
 
-# 源文件路径
+# 所有源文件
 TEST_SRCS = \
-    test_discipliner.c \
-    test_ruclock_utils.c \
-    test_main.c
+    unit/test_discipliner.c \
+    unit/test_ruclock_utils.c \
+    integration/test_main.c
 
-MOCK_SRCS = mock_csac_interfac.c
+MOCK_SRCS = \
+    mocks/mock_csac_interfac.c
 
 SRC_SRCS = \
     ../src/discipline/discipliner.c \
     ../src/utils/csac_utils.c
 
-# 所有源文件
 ALL_SRCS = $(TEST_SRCS) $(MOCK_SRCS) $(SRC_SRCS)
 
-# 生成目标文件列表
-OBJS = $(patsubst %.c, %.o, $(ALL_SRCS))
+# 转换为构建目录下的 .o 文件
+OBJS = $(patsubst %.c, $(BUILD_DIR)/%.o, $(filter-out ../%,$(ALL_SRCS))) \
+       $(patsubst ../src/%.c, $(BUILD_DIR)/src/%.o, $(filter ../src/%, $(ALL_SRCS)))
+
 TARGET = test_ruclock
 
 all: $(TARGET)
 	@echo "[test] Running tests..."
 	@./$(TARGET)
 	@echo "[test] Tests completed"
-	@echo "[test] Cleaning intermediate object files..."
-	@rm -f $(OBJS) ../src/discipline/*.o ../src/utils/*.o
 
 $(TARGET): $(OBJS)
-	@echo "[test] Linking test executable..."
+	@echo "[test] Linking $@..."
 	@$(CC) -o $@ $^
 
-# 通用编译规则
-%.o: %.c
-	@echo "[test] Compiling $<..."
+# 规则：普通 test/ 下的文件，如 unit/, integration/, mocks/
+$(BUILD_DIR)/%.o: %.c
+	@echo "[test] Compiling $< -> $@"
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-# 特殊处理不同目录的源文件
-../src/discipline/%.o: ../src/discipline/%.c
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-../src/utils/%.o: ../src/utils/%.c
-	@mkdir -p $(@D)
+# 规则：映射 ../src/... → build/src/...
+$(BUILD_DIR)/src/%.o: ../src/%.c
+	@echo "[test] Compiling $< -> $@"
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "[test] Cleaning test artifacts..."
-	@rm -f $(OBJS) $(TARGET)
-	@rm -f ../src/discipline/*.o ../src/utils/*.o
+	@echo "[test] Cleaning build/ and binary..."
+	@rm -rf $(BUILD_DIR) $(TARGET)
 
 .PHONY: all clean
