@@ -85,9 +85,9 @@ void test_telemetry_utils() {
 }
 
 void test_ruclock_utils() {
-  printf("\n🧪====================[ ruclock_utils TEST START ]====================🧪\n");
+  printf("\n====================[ ruclock_utils TEST START ]====================\n");
   test_format_ruclock_command();
   test_sanitize_ruclock_response();
   test_telemetry_utils();
-  printf("✅====================[ ruclock_utils TEST PASSED ]===================✅\n");
+  printf("====================[ ruclock_utils TEST PASSED ]===================\n");
 }

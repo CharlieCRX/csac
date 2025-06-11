@@ -30,6 +30,7 @@ void test_full_telemetry_data() {
     assert(telemetry.TOD == 259922);
     assert(telemetry.LTime == 259824);
     assert(strcmp(telemetry.fwVer, "1.09") == 0);
+    printf("✅ UC1: test_full_telemetry_data data: PASS\n");
 }
 
 void test_missing_optional_fields() {
@@ -38,9 +39,11 @@ void test_missing_optional_fields() {
     T_CSAC_telemetry telemetry;
     int ret = get_telemetry_data(&telemetry);
     assert(ret == 0);
-    assert(isnan(telemetry.aTune));
+    assert(telemetry.aTune == -1.0); // 未启用或不可用
     assert(telemetry.phase == INT16_MIN);
     assert(telemetry.disOK == -1);
+
+    printf("✅ UC2: test_missing_optional_fields: PASS\n");
 }
 
 void test_phase_needrefpps() {
@@ -52,11 +55,15 @@ void test_phase_needrefpps() {
     assert(fabs(telemetry.aTune - 1.23) < 1e-6);
     assert(telemetry.phase == INT16_MIN);
     assert(telemetry.disOK == -1);
+
+    printf("✅ UC3: test_phase_needrefpps: PASS\n");
 }
 
 
 void test_all_telemetry_tests() {
+    printf("\n====================[ telemetry_query TEST START ]====================\n");
     test_full_telemetry_data();
     test_missing_optional_fields();
     test_phase_needrefpps();
+    printf("====================[ telemetry_query TEST PASSED ]====================\n");
 }

@@ -62,10 +62,10 @@ void test_set_and_query_phase_threshold() {
 }
 
 void test_all_discipline_tests() {
-  printf("\n🧪====================[ discipliner TEST START ]====================🧪\n");
-  // test_status_failed_to_execute(); TODO: 需要先测试telemetry_query
-  // test_1PPS_sync_failed_to_execute(); TODO: 需要先测试telemetry_query
+  printf("\n====================[ discipliner TEST START ]====================\n");
+  test_status_failed_to_execute();
+  test_1PPS_sync_failed_to_execute();
   test_set_and_query_constant_time();
   test_set_and_query_phase_threshold();
-  printf("✅====================[ discipliner TEST PASSED ]===================✅\n");
+  printf("====================[ discipliner TEST PASSED ]===================\n");
 }
