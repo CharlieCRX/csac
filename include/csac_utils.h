@@ -1,6 +1,6 @@
 #ifndef CSAC_UTILS_H
 #define CSAC_UTILS_H
-
+#include <stdint.h>
 #include <stddef.h>
 
 
@@ -41,4 +41,11 @@ int ends_with_crlf(const char *buf, int len);
  * @return 去除末尾后的字符串长度（不含 '\0'）
  */
 int sanitize_ruclock_response(const char *raw, int len, char *cleaned);
+
+
+// Telemetry相关函数声明
+// 对应的`aTune`、`phase`和`disOK`无输出时对应值转换函数实现。
+double  convert_aTune(char *str);
+int16_t convert_phase(char *str);
+int8_t  convert_disOK(char *str);
 #endif

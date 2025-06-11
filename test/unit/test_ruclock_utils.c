@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <stdint.h>
 #include <csac_utils.h>
 
 void test_format_ruclock_command() {
@@ -54,9 +55,39 @@ void test_sanitize_ruclock_response() {
 }
 
 
+
+void test_convert_aTune() {
+  assert(convert_aTune("1.234") == 1.234);
+  assert(convert_aTune("3.456") == 3.456);
+  assert(convert_aTune("---") < 0);
+  assert(convert_aTune(NULL) < 0);
+}
+
+void test_convert_phase() {
+  assert(convert_phase("123") == 123);
+  assert(convert_phase("-456") == -456);
+  assert(convert_phase("---") == INT16_MIN);
+  assert(convert_phase("NEEDREFPPS") == INT16_MIN);
+}
+
+void test_convert_disOK() {
+  assert(convert_disOK("1") == 1);
+  assert(convert_disOK("0") == 0);
+  assert(convert_disOK("---") == -1);
+  assert(convert_disOK(NULL) == -1);
+}
+
+void test_telemetry_utils() {
+  test_convert_aTune();
+  test_convert_phase();
+  test_convert_disOK();
+  printf("✅ UC3: Convert aTune + phase + disOK: PASS\n");
+}
+
 void test_ruclock_utils() {
   printf("\n🧪====================[ ruclock_utils TEST START ]====================🧪\n");
   test_format_ruclock_command();
   test_sanitize_ruclock_response();
+  test_telemetry_utils();
   printf("✅====================[ ruclock_utils TEST PASSED ]===================✅\n");
 }

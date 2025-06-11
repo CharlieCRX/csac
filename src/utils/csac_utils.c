@@ -30,3 +30,25 @@ int sanitize_ruclock_response(const char *raw, int raw_len, char *cleaned)
     cleaned[clean_len] = '\0';
     return clean_len;
 }
+
+
+double convert_aTune(char *str) {
+    if (!str || strcmp(str, "---") == 0) {
+        return -1.0;  // 表示未启用或不可用
+    }
+    return strtod(str, NULL);
+}
+
+int16_t convert_phase(char *str) {
+    if (!str || strcmp(str, "---") == 0 || strcmp(str, "NEEDREFPPS") == 0) {
+        return INT16_MIN;  // 使用最小值表示无效
+    }
+    return (int16_t)strtol(str, NULL, 10);
+}
+
+int8_t convert_disOK(char *str) {
+    if (!str || strcmp(str, "---") == 0) {
+        return -1;  // 表示未知或未启用
+    }
+    return (int8_t)atoi(str);
+}

@@ -6,6 +6,7 @@ BUILD_DIR = build
 TEST_SRCS = \
     unit/test_discipliner.c \
     unit/test_ruclock_utils.c \
+		unit/test_telemetry_query.c \
     integration/test_main.c
 
 MOCK_SRCS = \
@@ -13,7 +14,8 @@ MOCK_SRCS = \
 
 SRC_SRCS = \
     ../src/discipline/discipliner.c \
-    ../src/utils/csac_utils.c
+    ../src/utils/csac_utils.c\
+		../src/telemetry_info/telemetry_query.c
 
 ALL_SRCS = $(TEST_SRCS) $(MOCK_SRCS) $(SRC_SRCS)
 

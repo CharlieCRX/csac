@@ -1,5 +1,6 @@
 #ifndef _ENUMS_H_
 #define _ENUMS_H_
+#include <stdint.h>
 typedef enum {
   Asleep = 9,               // ULP mode only
   Warmup = 8,               // Initial warm-up
@@ -33,44 +34,44 @@ typedef enum {
 
 typedef enum {
   AnalogTuning = 0x0001,               // A Analog tuning. a
-  Reserved1 = 0x0002,                   // Reserved. —
+  Reserved1 = 0x0002,                  // Reserved. —
   OnePPSPhaseMeasurement = 0x0004,     // M 1PPS phase measurement (only available on firmware versions 1.08 and later). m
   OnePPSAutoSync = 0x0008,             // S 1PPS auto-sync. s
   Discipline = 0x0010,                 // D Discipline. d
   UltraLowPowerMode = 0x0020,          // U Ultra-Low Power mode. u
   RequireChecksumOnCommand = 0x0040,   // C Require checksum on ! command. c
-  Reserved2 = 0x0080,                   // Reserved. —
+  Reserved2 = 0x0080,                  // Reserved. —
   ReportCurrentSettings = 0x00FF       // ? Report current settings.
 } E_telemetry_operating_modes;
 
 
 typedef struct CSAC_telemetry{
-  E_telemetry_status        status;         // Unit status
+  E_telemetry_status        status;        // Unit status
   E_telemetry_alarms       alarms;         // Pending unit alarms
-  char SN[12];                 // Unit serial number
-  E_telemetry_operating_modes  modes;          // Mode of operation
-  uint32_t  Contrast;                    // Indication of signal level
-  double laserI;                     // Laser current (mA)
+  char SN[12];                             // Unit serial number
+  E_telemetry_operating_modes  modes;      // Mode of operation
+  uint32_t  Contrast;     // Indication of signal level
+  double laserI;          // Laser current (mA)
   double tcxo;            // Tuning voltage (V)
   double heatP;           // Physics package heater power (mW)
-  double sigV;             // DC signal level (V)
+  double sigV;            // DC signal level (V)
   double temp;            // Unit temperature (°C)
-  int32_t steer;           // Frequency adjust
+  int32_t steer;          // Frequency adjust
   double aTune;           // Analog tuning voltage input (V)
-  int16_t phase;           // Difference between CSAC and external 1PPS (ns)
-  int8_t disOK;             // Discipline status
-  uint32_t TOD;             // Time (seconds)
-  uint32_t LTime;           // Time since lock (seconds)
-  char fwVer[5];            // Firmware version
+  int16_t phase;          // Difference between CSAC and external 1PPS (ns)
+  int8_t disOK;           // Discipline status
+  uint32_t TOD;           // Time (seconds)
+  uint32_t LTime;         // Time since lock (seconds)
+  char fwVer[5];          // Firmware version
 } T_CSAC_telemetry;
 
 typedef enum {
   Telemetry_Headers           = '6',
   Telemetry_Data              = '^',
   Freqyency_Adjustment        = 'F',
-  Operating_Modes              = 'M',
-  Discipline_Time              = 'D',
-  U_L_power_param              = 'U',
+  Operating_Modes             = 'M',
+  Discipline_Time             = 'D',
+  U_L_power_param             = 'U',
   Time_day                    = 'T',
   Discipline_Check            = 'm',
   Pulse_Multiple              = '>',
