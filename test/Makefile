@@ -8,6 +8,7 @@ TEST_SRCS = \
     unit/test_ruclock_utils.c \
 		unit/test_telemetry_query.c \
 		unit/test_mock_interface.c \
+		unit/test_mode_controller.c \
     integration/test_main.c
 
 MOCK_SRCS = \
@@ -16,7 +17,8 @@ MOCK_SRCS = \
 SRC_SRCS = \
     ../src/discipline/discipliner.c \
     ../src/utils/csac_utils.c\
-		../src/telemetry/telemetry_query.c
+		../src/telemetry/telemetry_query.c \
+		../src/operation_modes/mode_controller.c
 
 ALL_SRCS = $(TEST_SRCS) $(MOCK_SRCS) $(SRC_SRCS)
 

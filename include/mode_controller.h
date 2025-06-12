@@ -5,13 +5,22 @@
 #include <stdbool.h>
 #include "enums.h"
 
-// 设置模式：true 启用，false 禁用
-bool set_mode(E_CSAC_operating_modes mode, bool enable);
+/**
+ * @brief 设置指定模式的状态
+ * 
+ * @param mode 要设置的模式（单个模式位）
+ * @param enable true=使能, false=禁用
+ * @param[out] new_modes 设置成功后设备返回的新模式状态
+ * @return int 0=成功, -1=通信失败, -2=解析失败, -3=设置未生效
+ */
+int set_mode(E_CSAC_operating_modes mode, bool enable, uint16_t* new_modes);
 
-// 查询当前启用模式位
-uint16_t query_current_modes(void);
-
-// 解析当前模式位中是否启用了指定模式
-bool is_mode_enabled(uint16_t mode_flags, E_CSAC_operating_modes mode);
+/**
+ * @brief 查询当前所有模式的状态
+ * 
+ * @param[out] modes 当前模式位图
+ * @return int 0=成功, -1=通信失败, -2=解析失败
+ */
+int query_modes(uint16_t* modes);
 
 #endif
