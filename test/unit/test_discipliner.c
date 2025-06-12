@@ -61,6 +61,20 @@ void test_set_and_query_phase_threshold() {
   printf("✅ UC4: Set phase threshold: PASS\n");
 }
 
+void test_enable_and_query_discipline_mode() {
+  // 模拟启用模式
+  mock_set_telemetry_response("0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
+  assert(discipliner_enable(true));
+  assert(discipliner_is_enable());
+
+  // 模拟禁用模式
+  mock_set_telemetry_response("0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
+  assert(discipliner_enable(false));
+  assert(!discipliner_is_enable());
+
+  printf("✅ UC5: Enable and query discipline mode: PASS\n");
+}
+
 void test_all_discipline_tests() {
   printf("\n====================[ discipliner TEST START ]====================\n");
   test_status_failed_to_execute();
