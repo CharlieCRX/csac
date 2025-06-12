@@ -7,6 +7,74 @@
 #include <uart.h>
 #include <csac_macros.h>
 #include <csac_utils.h>
+#include <discipliner.h>
+#include <telemetry_query.h>
+#include <enums.h>
+
+bool ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant)
+{
+  if (!discipliner_is_CSAC_status_ready()) {
+    ERR_LOG("铷钟状态不稳定\n");
+    return false;
+  }
+
+  if (!discipliner_is_1PPS_EXT_ready()) {
+    ERR_LOG("1PPS 输入信号未准备就绪\n");
+    return false;
+  }
+
+  if (!discipliner_set_phase_threshold(ns_threshold)) {
+    ERR_LOG("设置相位阈值失败：PhaseThreshold=%d ns\n", ns_threshold);
+    return false;
+  }
+
+
+  if (!discipliner_set_time_constant(time_constant)) {
+    ERR_LOG("设置时间常数失败：TimeConstant=%d s\n", time_constant);
+    return false;
+  }
+  
+  if (discipliner_enable(true)) {
+    DEBUG_LOG("训练开始：PhaseThreshold=%d ns, TimeConstant=%d s\n", ns_threshold, time_constant);
+    return true;
+  } else {
+    ERR_LOG("训练启动失败\n");
+    return false;
+  }
+}
+
+void discipliner_stop_training(const char *reason)
+{
+  discipliner_enable(false);
+  DEBUG_LOG("训练终止：%s\n", reason);
+}
+
+bool ruclock_discipliner_update_training_status() {
+  T_CSAC_telemetry telemetry;
+  get_telemetry_data(&telemetry);
+  if (telemetry.disOK == 0) {
+    DEBUG_LOG("训练中：DiscOK=%d, Phase=%d ns\n", telemetry.disOK, telemetry.phase);
+    return false;
+  }
+
+  if (telemetry.disOK == 1) {
+    discipliner_stop_training("驯服成功！");
+    return true;
+  }
+
+  else if (telemetry.disOK == 2) {
+    discipliner_stop_training("驯服失败：信号中断");
+    return true; // 返回 true 表示训练已完成（失败）
+  } 
+  
+  else {
+    discipliner_stop_training("驯服错误：并未设置驯服模式");
+    return true; // 返回 true 表示训练已完成（失败）
+  }
+}
+
+
+
 // 绝对值调整 CSAC 频率
 //flag表示是绝对值写入还是相对值写入，绝对值写入就是‘A’,相对值写入就是‘D’
 int adjust_frequency(char flag, int freq, int *updated_freq) {
@@ -87,37 +155,6 @@ int latch_current_frequency(void) {
   // 输出响应
   printf("Frequency adjust response: %s\n", recv_buf);
   return 0;
-}
-
-// 设置操作模式
-// 返回值：设置成功返回1， 设置失败返回0， 命令错误返回-1
-int set_operating_modes(Telemetry_Modes_type type)
-{
-  char command[COMMAND_LENGTH];  // 命令字符串长度
-  char response[RESPONSE_LENGTH]; // 响应字符串长度
-  int recv_n;
-
-  snprintf(command, sizeof(command), "%c%c", 'M', type);
-
-  recv_n = csac_send_command(command, response);  
-
-  if(recv_n <= 0){
-    printf("recv is empty!\n");
-    return -1;
-  }
-
-  // 从响应中提取返回值
-  int ret = 0;
-  if (sscanf(response, "0x000%d", &ret) != 1) {  // ?
-    printf("Error: Failed to extract frequency value from response.\n");
-    return -1;
-  }
-
-  // 输出响应
-  printf("return value = %d\n", ret);
-  printf("Unit response: %s\n", response);
-
-  return ret;
 }
 
 //延迟命令，延迟单位是秒

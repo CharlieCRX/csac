@@ -12,6 +12,18 @@
 bool discipliner_is_ready_to_execute();
 
 /**
+ * @brief 检查铷钟状态是否稳定
+ * @return true = 铷钟状态稳定，false = 铷钟状态不稳定
+ */
+bool discipliner_is_CSAC_status_ready();
+
+/**
+ * @brief 检查1PPS_EXT是否准备就绪
+ * @return true = 1PPS_EXT 准备就绪，false = 1PPS_EXT 未准备就绪
+ */
+bool discipliner_is_1PPS_EXT_ready();
+
+/**
  * @brief 启用或禁用 GPS disciplining 模式
  * @param enable true = 启用 (发送 !M=0x0010)，false = 禁用 (!M=0x0000)
  */
@@ -48,7 +60,6 @@ bool discipliner_set_phase_threshold(uint8_t ns);
  * @return ns_threshold 范围 [1, 255]
  */
 uint8_t discipliner_get_phase_threshold();
-
 
 bool discipliner_force_reinitialize();  // 强制重新开始 discipline（用于信号源恢复）
 #endif

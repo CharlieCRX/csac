@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "discipliner.h"
@@ -10,18 +11,12 @@
 #include "csac_macros.h"
 #include "mode_controller.h"
 
-// Helper function
-bool is_CSAC_status_ready();
-bool is_1PPS_EXT_ready();
-
-
-
 // Discilipine Fuction
 bool discipliner_is_ready_to_execute()
 {
   bool ret = true;
-  ret &= is_CSAC_status_ready();
-  ret &= is_1PPS_EXT_ready();
+  ret &= discipliner_is_CSAC_status_ready();
+  ret &= discipliner_is_1PPS_EXT_ready();
   return ret;
 }
 
@@ -40,6 +35,7 @@ bool discipliner_is_enable()
 bool discipliner_set_time_constant(uint16_t sec)
 {
   if (sec < 10 || sec > 10000) {
+    ERR_LOG("Error: Time constant out of range (10-10000 seconds).\n");
     return false;
   }
 
@@ -71,6 +67,7 @@ uint16_t discipliner_get_time_constant()
 bool discipliner_set_phase_threshold(uint8_t ns)
 {
   if (ns < 1) {
+    ERR_LOG("Error: Phase threshold must be at least 1 ns.\n");
     return false;
   }
 
@@ -99,8 +96,7 @@ uint8_t discipliner_get_phase_threshold()
   return atoi(response);
 }
 
-// [START] - Helper function definition
-bool is_CSAC_status_ready()
+bool discipliner_is_CSAC_status_ready()
 {
   T_CSAC_telemetry telemetry;
   // 查询铷钟状态
@@ -110,7 +106,7 @@ bool is_CSAC_status_ready()
   return telemetry.status == Locked;
 }
 
-bool is_1PPS_EXT_ready()
+bool discipliner_is_1PPS_EXT_ready()
 {
   char response[RESPONSE_LENGTH];
   int len = csac_send_command((const char *)SYNC_1PPS_MANUAL, response);

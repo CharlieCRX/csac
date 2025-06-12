@@ -26,12 +26,14 @@ LIB_DIR = lib/comm_protocol
 
 # 查找所有源文件
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+COMM_PROTOCOL_SRC := $(wildcard $(LIB_DIR)/*.c)
 UTILS_SRC := $(wildcard $(SRC_DIR)/utils/*.c)
 TELEMETRY_SRC := $(wildcard $(SRC_DIR)/telemetry/*.c)
-COMM_PROTOCOL_SRC := $(wildcard $(LIB_DIR)/*.c)
+MODES_SRC := $(wildcard $(SRC_DIR)/operation_modes/*.c)
+DISCIPLINE_SRC := $(wildcard $(SRC_DIR)/discipline/*.c)
 
 # 所有源文件列表
-ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC) $(TELEMETRY_SRC)
+ALL_SRC_FILES := $(SRC_FILES) $(UTILS_SRC) $(COMM_PROTOCOL_SRC) $(TELEMETRY_SRC) $(MODES_SRC) $(DISCIPLINE_SRC)
 
 # 生成对应的目标文件列表
 OBJ_FILES := $(patsubst %.c, %.o, $(ALL_SRC_FILES))
