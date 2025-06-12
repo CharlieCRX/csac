@@ -39,7 +39,7 @@ int get_telemetry_data(T_CSAC_telemetry *telemetry) {
   telemetry->alarms = (E_telemetry_alarms)strtol(fields[1], NULL, 16); // 0x1234
   strncpy(telemetry->SN, fields[2], sizeof(telemetry->SN)-1);
   telemetry->SN[sizeof(telemetry->SN)-1] = '\0'; // 保证结尾
-  telemetry->modes = (E_telemetry_operating_modes)strtol(fields[3], NULL, 16);
+  telemetry->modes = (E_CSAC_operating_modes)strtol(fields[3], NULL, 16);
   telemetry->Contrast = (uint32_t)strtoul(fields[4], NULL, 10);
   telemetry->laserI = strtod(fields[5], NULL);
   telemetry->tcxo = strtod(fields[6], NULL);

@@ -32,24 +32,28 @@ typedef enum {
   StackOverflowError = 0x4000               // Stack overflow (firmware error)
 } E_telemetry_alarms;
 
+/**
+ * @brief Operating modes for CSAC.
+ *
+ * Each bit represents a toggleable feature or reserved space.
+ * Mode values correspond to enable/disable commands and telemetry reports.
+ */
 typedef enum {
-  AnalogTuning = 0x0001,               // A Analog tuning. a
-  Reserved1 = 0x0002,                  // Reserved. —
-  OnePPSPhaseMeasurement = 0x0004,     // M 1PPS phase measurement (only available on firmware versions 1.08 and later). m
-  OnePPSAutoSync = 0x0008,             // S 1PPS auto-sync. s
-  Discipline = 0x0010,                 // D Discipline. d
-  UltraLowPowerMode = 0x0020,          // U Ultra-Low Power mode. u
-  RequireChecksumOnCommand = 0x0040,   // C Require checksum on ! command. c
-  Reserved2 = 0x0080,                  // Reserved. —
-  ReportCurrentSettings = 0x00FF       // ? Report current settings.
-} E_telemetry_operating_modes;
+  MODE_ANALOG_TUNING             = 0x0001,  ///< 'A' Analog tuning, disable with 'a'
+  MODE_1PPS_PHASE_MEASUREMENT    = 0x0004,  ///< 'M' 1PPS phase measurement, disable with 'm'
+  MODE_1PPS_AUTO_SYNC            = 0x0008,  ///< 'S' 1PPS auto-sync, disable with 's'
+  MODE_DISCIPLINE                = 0x0010,  ///< 'D' Discipline, disable with 'd'
+  MODE_ULTRA_LOW_POWER           = 0x0020,  ///< 'U' Ultra-low power mode, disable with 'u'
+  MODE_CHECKSUM_REQUIRED         = 0x0040,  ///< 'C' Require checksum on '!' commands, disable with 'c'
+} E_CSAC_operating_modes;
+
 
 
 typedef struct CSAC_telemetry{
   E_telemetry_status        status;        // Unit status
   E_telemetry_alarms       alarms;         // Pending unit alarms
   char SN[12];                             // Unit serial number
-  E_telemetry_operating_modes  modes;      // Mode of operation
+  E_CSAC_operating_modes  modes;      // Mode of operation
   uint32_t  Contrast;     // Indication of signal level
   double laserI;          // Laser current (mA)
   double tcxo;            // Tuning voltage (V)
