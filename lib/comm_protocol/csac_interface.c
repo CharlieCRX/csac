@@ -18,7 +18,7 @@ int csac_send_command(const char *command, char *response)
   // 串口初始化
   uart_exit(UART2);
   iRet = uart_init(UART2);
-  if(iRet!=0) {
+  if(iRet!= 0) {
     return iRet;
   }
   // 格式化命令

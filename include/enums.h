@@ -39,6 +39,7 @@ typedef enum {
  * Mode values correspond to enable/disable commands and telemetry reports.
  */
 typedef enum {
+  MODE_NONE                      = 0x0000,  ///<  Initial state, no modes enabled
   MODE_ANALOG_TUNING             = 0x0001,  ///< 'A' Analog tuning, disable with 'a'
   MODE_1PPS_PHASE_MEASUREMENT    = 0x0004,  ///< 'M' 1PPS phase measurement, disable with 'm'
   MODE_1PPS_AUTO_SYNC            = 0x0008,  ///< 'S' 1PPS auto-sync, disable with 's'
@@ -47,6 +48,11 @@ typedef enum {
   MODE_CHECKSUM_REQUIRED         = 0x0040,  ///< 'C' Require checksum on '!' commands, disable with 'c'
 } E_CSAC_operating_modes;
 
+
+// 互斥模式掩码 (M/S/D)
+#define MUTEX_MODES_MASK (MODE_1PPS_PHASE_MEASUREMENT | \
+  MODE_1PPS_AUTO_SYNC | \
+  MODE_DISCIPLINE)
 
 
 typedef struct CSAC_telemetry{

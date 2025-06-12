@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -I../include -I../lib/comm_protocol -I../src -I./mocks -DUNIT_TEST
+CFLAGS = -Wall -I../include -I../lib/comm_protocol -I./mocks -DUNIT_TEST
 BUILD_DIR = build
 
 # 所有源文件
@@ -7,10 +7,11 @@ TEST_SRCS = \
     unit/test_discipliner.c \
     unit/test_ruclock_utils.c \
 		unit/test_telemetry_query.c \
+		unit/test_mock_interface.c \
     integration/test_main.c
 
 MOCK_SRCS = \
-    mocks/mock_csac_interfac.c
+    mocks/mock_csac_interface.c
 
 SRC_SRCS = \
     ../src/discipline/discipliner.c \

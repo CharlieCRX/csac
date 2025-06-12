@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <stdint.h>
-#include <mock_csac_interfac.h>
+#include <mock_csac_interface.h>
 #include <telemetry_query.h>
 #include "enums.h"
 void test_full_telemetry_data() {

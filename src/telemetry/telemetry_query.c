@@ -5,7 +5,7 @@
 #include "csac_utils.h"
 #include "csac_macros.h"
 #ifdef UNIT_TEST
-#include "mock_csac_interfac.h"
+#include "mock_csac_interface.h"
 #else
 #include <csac_interface.h>
 #endif

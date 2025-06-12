@@ -3,7 +3,7 @@
 #include "discipliner.h"
 #include "telemetry_query.h"
 #ifdef UNIT_TEST
-#include "mock_csac_interfac.h"
+#include "mock_csac_interface.h"
 #else
 #include <csac_interface.h>
 #endif
