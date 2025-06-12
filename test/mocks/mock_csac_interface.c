@@ -21,6 +21,7 @@ static char mock_telemetry_response[MAX_RESPONSE_LENGTH] = "0,0x0000,2203CS77980
 static char mock_1PPS_sync_response[MAX_RESPONSE_LENGTH] = "S";
 static char mock_time_constant_response[MAX_RESPONSE_LENGTH] = "10";
 static char mock_phase_threshold_response[MAX_RESPONSE_LENGTH] = "20";
+static char mock_mode_response[MAX_RESPONSE_LENGTH] = "0x0000";
 
 // 添加模式控制相关变量
 static uint16_t current_modes = MODE_NONE; // 当前模式状态
@@ -94,6 +95,11 @@ int csac_send_command(const char *command, char *response)
   else if (command[0] == 'M') {
     char cmd = command[1];
     uint16_t new_mode = current_modes;
+
+    if (mock_mode_response[0] != '0' || mock_mode_response[1] != 'x') {
+      strcpy(response, mock_mode_response);
+      return strlen(response);
+    }
     
     // 处理命令
     switch(cmd) {
@@ -171,6 +177,8 @@ int csac_send_command(const char *command, char *response)
     
     // 返回更新后的模式
     snprintf(response, MAX_RESPONSE_LENGTH, "0x%04X", current_modes);
+    strncpy(mock_mode_response, response, MAX_RESPONSE_LENGTH - 1);
+    mock_mode_response[MAX_RESPONSE_LENGTH - 1] = '\0'; // 确保字符串以'\0'结尾
     return strlen(response);
   }
   return -1;
@@ -194,6 +202,9 @@ void mock_set_mode_response(const char *resp) {
   if (strncmp(resp, "0x", 2) == 0) {
     current_modes = (uint16_t)strtoul(resp, NULL, 16);
   }
+  // 如果不是十六进制格式，直接存储响应
+  strncpy(mock_mode_response, resp, MAX_RESPONSE_LENGTH - 1);
+  mock_mode_response[MAX_RESPONSE_LENGTH - 1] = '\0'; // 确保字符串以'\0'结尾
 }
 
 // 设置模拟通信失败
@@ -229,4 +240,5 @@ void mock_reset(void) {
   strcpy(mock_1PPS_sync_response, "S");
   strcpy(mock_time_constant_response, "10");
   strcpy(mock_phase_threshold_response, "20");
+  strcpy(mock_mode_response, "0x0000");
 }

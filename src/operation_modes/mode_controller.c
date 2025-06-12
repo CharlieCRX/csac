@@ -22,7 +22,7 @@ int set_mode(E_CSAC_operating_modes mode, bool enable, uint16_t* new_modes){
     case MODE_DISCIPLINE:             strcpy(cmd, enable ? "MD" : "Md"); break;
     case MODE_ULTRA_LOW_POWER:        strcpy(cmd, enable ? "MU" : "Mu"); break;
     case MODE_CHECKSUM_REQUIRED:      strcpy(cmd, enable ? "MC" : "Mc"); break; // TODO Command: !Mc*2E[CRLF]
-    default: return false;
+    default: return -2; // 无效模式位 -- 响应也是'?'
   }
   // 发送命令并获取响应
   int response_length = csac_send_command(cmd, response);
@@ -41,8 +41,8 @@ int set_mode(E_CSAC_operating_modes mode, bool enable, uint16_t* new_modes){
   }
   // 检查是否设置成功
   bool success = enable ? (new_mode & mode) : !(new_mode & mode);
+  *new_modes = new_mode; // 返回新模式
   if (success) {
-    *new_modes = new_mode; // 返回新模式
     return 0; // 成功
   } else {
     return -3; // 设置未生效
