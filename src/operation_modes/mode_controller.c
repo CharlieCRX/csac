@@ -21,7 +21,7 @@ int set_mode(E_CSAC_operating_modes mode, bool enable, uint16_t* new_modes){
     case MODE_1PPS_AUTO_SYNC:         strcpy(cmd, enable ? "MS" : "Ms"); break;
     case MODE_DISCIPLINE:             strcpy(cmd, enable ? "MD" : "Md"); break;
     case MODE_ULTRA_LOW_POWER:        strcpy(cmd, enable ? "MU" : "Mu"); break;
-    case MODE_CHECKSUM_REQUIRED:      strcpy(cmd, enable ? "MC" : "Mc"); break; // TODO Command: !Mc*2E[CRLF]
+    case MODE_CHECKSUM_REQUIRED:      strcpy(cmd, enable ? "MC" : "Mc*2E"); break; // TODO Command: !Mc*2E[CRLF]
     default: return -2; // 无效模式位 -- 响应也是'?'
   }
   // 发送命令并获取响应

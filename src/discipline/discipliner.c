@@ -8,6 +8,7 @@
 #include <csac_interface.h>
 #endif
 #include "csac_macros.h"
+#include "mode_controller.h"
 
 // Helper function
 bool is_CSAC_status_ready();
@@ -26,12 +27,15 @@ bool discipliner_is_ready_to_execute()
 
 bool discipliner_enable(bool on)
 {
-  return false;
+  uint16_t new_modes;
+  return (set_mode(MODE_DISCIPLINE, true, new_modes) == 0) &&
+         (new_modes & MODE_DISCIPLINE) == MODE_DISCIPLINE;
 }
 
 bool discipliner_is_enable()
 {
-  return false;
+  uint16_t modes;
+  return (query_modes(&modes) == 0) && (modes & MODE_DISCIPLINE) == MODE_DISCIPLINE;
 }
 
 bool discipliner_set_time_constant(uint16_t sec)
