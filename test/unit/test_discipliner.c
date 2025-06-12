@@ -63,12 +63,10 @@ void test_set_and_query_phase_threshold() {
 
 void test_enable_and_query_discipline_mode() {
   // 模拟启用模式
-  mock_set_telemetry_response("0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
   assert(discipliner_enable(true));
   assert(discipliner_is_enable());
 
   // 模拟禁用模式
-  mock_set_telemetry_response("0,0x0000,2203CS77980,0x0000,3452,1.05,1.492,10.69,1.339,27.54,624,---,---,---,259922,259824,1.10");
   assert(discipliner_enable(false));
   assert(!discipliner_is_enable());
 
@@ -81,5 +79,6 @@ void test_all_discipline_tests() {
   test_1PPS_sync_failed_to_execute();
   test_set_and_query_constant_time();
   test_set_and_query_phase_threshold();
+  test_enable_and_query_discipline_mode();
   printf("====================[ discipliner TEST PASSED ]===================\n");
 }

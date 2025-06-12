@@ -28,7 +28,7 @@ bool discipliner_is_ready_to_execute()
 bool discipliner_enable(bool on)
 {
   uint16_t new_modes;
-  return set_mode(MODE_DISCIPLINE, on, &new_modes);
+  return (set_mode(MODE_DISCIPLINE, on, &new_modes) == 0);
 }
 
 bool discipliner_is_enable()
