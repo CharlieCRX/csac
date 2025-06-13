@@ -56,11 +56,11 @@ static int parse_args(int argc, char *argv[]) {
           test_update_training_status();        break;
       default:
           printf("Usage: %s [OPTION...] [args]\n\n", argv[0]);
-          printf("\t--read [command]          执行读取命令\n");
-          printf("\t--get-telemetry-data      获取遥测数据\n");
-          printf("\t--test                    运行所有命令测试\n");
+          printf("\t--read [command]            执行读取命令\n");
+          printf("\t--get-telemetry-data        获取遥测数据\n");
+          printf("\t--test                      运行所有命令测试\n");
           printf("\t--start-training <ns>,<sec> 启动训练测试 (例如: 50,300)\n"); // 新增
-          printf("\t--update-training         更新训练状态测试\n");              // 新增
+          printf("\t--update-training           更新训练状态测试\n");              // 新增
           printf("\n");
           exit(0);
     }
