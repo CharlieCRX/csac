@@ -10,7 +10,10 @@
 #include <discipliner.h>
 #include <telemetry_query.h>
 #include <csac_enums.h>
-
+void delay_cycles(int loops) {
+  volatile int count = 10000 * loops;
+  while (count--) {}     // 空循环，等待
+}
 DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant)
 {
   if (!discipliner_is_CSAC_status_ready()) {
@@ -31,6 +34,7 @@ DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, u
     };
   }
 
+  delay_cycles(100);
   if (!discipliner_set_phase_threshold(ns_threshold)) {
     ERR_LOG("设置相位阈值失败：PhaseThreshold=%d ns\n", ns_threshold);
     return (DisciplineStartResult){
@@ -40,6 +44,7 @@ DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, u
     };
   }
 
+  delay_cycles(100);
   if (!discipliner_set_time_constant(time_constant)) {
     ERR_LOG("设置时间常数失败：TimeConstant=%d s\n", time_constant);
     return (DisciplineStartResult){
