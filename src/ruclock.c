@@ -77,28 +77,25 @@ void discipliner_stop_training(const char *reason)
   DEBUG_LOG("训练终止：%s\n", reason);
 }
 
-bool ruclock_discipliner_update_training_status() {
+T_CSAC_telemetry ruclock_discipliner_update_training_status() {
   T_CSAC_telemetry telemetry;
   get_telemetry_data(&telemetry);
   if (telemetry.disOK == 0) {
-    DEBUG_LOG("训练中：DiscOK=%d, Phase=%d ns\n", telemetry.disOK, telemetry.phase);
-    return false;
+    DEBUG_LOG("训练中：DiscOK=%d, Steer = %d, Phase=%d ns\n", telemetry.disOK, telemetry.steer, telemetry.phase);
   }
 
-  if (telemetry.disOK == 1) {
+  else if (telemetry.disOK == 1) {
     discipliner_stop_training("驯服成功！");
-    return true;
   }
 
   else if (telemetry.disOK == 2) {
     discipliner_stop_training("驯服失败：信号中断");
-    return true; // 返回 true 表示训练已完成（失败）
   } 
   
   else {
     discipliner_stop_training("驯服错误：并未设置驯服模式");
-    return true; // 返回 true 表示训练已完成（失败）
   }
+  return telemetry;
 }
 
 
