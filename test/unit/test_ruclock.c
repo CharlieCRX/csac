@@ -50,5 +50,5 @@ void test_all_ruclock_functions() {
   test_start_training_success();
   test_start_training_fail_on_device_not_ready();
   test_start_training_fail_on_sync_failure();
-  printf("\n====================[ RUCLOCK TEST START ]====================\n");
+  printf("====================[ RUCLOCK TEST PASSED ]====================\n");
 }
