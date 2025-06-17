@@ -44,7 +44,7 @@ DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, u
     };
   }
 
-  delay_cycles(100);
+  delay_cycles(1000);
   if (!discipliner_set_time_constant(time_constant)) {
     ERR_LOG("设置时间常数失败：TimeConstant=%d s\n", time_constant);
     return (DisciplineStartResult){
