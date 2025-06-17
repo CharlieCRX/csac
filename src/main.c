@@ -109,10 +109,10 @@ void test_start_training(const char *args) {
   DEBUG_LOG("启动训练测试: 阈值=%dns, 时间常数=%d秒\n", ns_threshold, time_constant);
   
   // 执行训练启动
-  bool result = ruclock_discipliner_start_training(ns_threshold, time_constant);
+  DisciplineStartResult result = ruclock_discipliner_start_training(ns_threshold, time_constant);
   
   // 输出结果
-  if (result) {
+  if (result.code == DISCIPLINE_START_OK) {
     DEBUG_LOG("训练启动成功！\n");
   } else {
     ERR_LOG("训练启动失败！\n");
