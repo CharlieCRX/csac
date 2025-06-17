@@ -7,7 +7,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <csac_macros.h>
-#include <enums.h>
+#include <csac_enums.h>
 
 void test_mode_operations() {
   char response[MAX_RESPONSE_LENGTH];

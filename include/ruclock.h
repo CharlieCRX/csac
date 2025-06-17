@@ -3,7 +3,25 @@
 #include <stdint.h>
 #include <pthread.h>
 #include <stdbool.h>
-#include "enums.h"
+#include "csac_enums.h"
+
+/** 外部程序交互的结构体 */
+typedef enum {
+  DISCIPLINE_START_OK,
+  DISCIPLINE_START_ERR_CSAC_NOT_READY,
+  DISCIPLINE_START_ERR_1PPS_NOT_READY,
+  DISCIPLINE_START_ERR_SET_PHASE_FAIL,
+  DISCIPLINE_START_ERR_SET_TIME_CONSTANT_FAIL,
+  DISCIPLINE_START_ERR_ENABLE_FAIL
+} DisciplineStartStatus;
+
+typedef struct {
+  bool success;
+  DisciplineStartStatus code;
+  const char* message;  // 可以前端直接弹出
+} DisciplineStartResult;
+
+
 /**
  * @brief 启动训练过程
  * 
@@ -17,7 +35,7 @@
  * @param time_constant 训练时间常数（秒）范围 [10, 10000]
  * @return bool 训练是否成功启动
  */
-bool ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant);
+DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant);
 
 /**
  * @brief 更新训练状态并决定是否停止训练

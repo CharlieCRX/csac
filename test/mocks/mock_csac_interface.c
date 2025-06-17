@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "enums.h"
+#include "csac_enums.h"
 #include "csac_macros.h"
 // 定义字段名数组（按你提供的顺序）
 const char *field_keys[] = {

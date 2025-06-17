@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "enums.h"
+#include "csac_enums.h"
 
 /**
  * @brief 设置指定模式的状态

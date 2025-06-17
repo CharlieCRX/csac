@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <mock_csac_interface.h>
 #include <telemetry_query.h>
-#include "enums.h"
+#include "csac_enums.h"
 void test_full_telemetry_data() {
     mock_set_telemetry_response("5,0x0000,2203CS77980,0x0001,3452,1.05,1.492,10.69,1.339,27.54,624,2.34,123,1,259922,259824,1.09");
 

@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <mock_csac_interface.h>
 #include <mode_controller.h>
-#include "enums.h"
+#include "csac_enums.h"
 
 void test_set_mode_success() {
   uint16_t new_modes;

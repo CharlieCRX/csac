@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "enums.h"
+#include "csac_enums.h"
 
 int csac_send_command(const char *command, char *response);
 int get_telemetry_data(T_CSAC_telemetry *telemetry);

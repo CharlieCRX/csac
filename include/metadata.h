@@ -1,6 +1,6 @@
 #ifndef _METADATA_H_
 #define _METADATA_H_
-#include "enums.h" // 仅依赖枚举定义
+#include "csac_enums.h" // 仅依赖枚举定义
 
 /* 模式位元数据接口 */
 typedef struct {

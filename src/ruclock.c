@@ -9,38 +9,61 @@
 #include <csac_utils.h>
 #include <discipliner.h>
 #include <telemetry_query.h>
-#include <enums.h>
+#include <csac_enums.h>
 
-bool ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant)
+DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, uint16_t time_constant)
 {
   if (!discipliner_is_CSAC_status_ready()) {
     ERR_LOG("铷钟状态不稳定\n");
-    return false;
+    return (DisciplineStartResult){
+      .success = false,
+      .code = DISCIPLINE_START_ERR_CSAC_NOT_READY,
+      .message = "铷钟状态不稳定，无法开始驯服"
+    };
   }
 
   if (!discipliner_is_1PPS_EXT_ready()) {
     ERR_LOG("1PPS 输入信号未准备就绪\n");
-    return false;
+    return (DisciplineStartResult){
+      .success = false,
+      .code = DISCIPLINE_START_ERR_1PPS_NOT_READY,
+      .message = "1PPS输入信号未准备就绪"
+    };
   }
 
   if (!discipliner_set_phase_threshold(ns_threshold)) {
     ERR_LOG("设置相位阈值失败：PhaseThreshold=%d ns\n", ns_threshold);
-    return false;
+    return (DisciplineStartResult){
+      .success = false,
+      .code = DISCIPLINE_START_ERR_SET_PHASE_FAIL,
+      .message = "设置相位阈值失败"
+    };
   }
-
 
   if (!discipliner_set_time_constant(time_constant)) {
     ERR_LOG("设置时间常数失败：TimeConstant=%d s\n", time_constant);
-    return false;
+    return (DisciplineStartResult){
+      .success = false,
+      .code = DISCIPLINE_START_ERR_SET_TIME_CONSTANT_FAIL,
+      .message = "设置时间常数失败"
+    };
   }
-  
-  if (discipliner_enable(true)) {
-    DEBUG_LOG("训练开始：PhaseThreshold=%d ns, TimeConstant=%d s\n", ns_threshold, time_constant);
-    return true;
-  } else {
+
+  if (!discipliner_enable(true)) {
     ERR_LOG("训练启动失败\n");
-    return false;
+    return (DisciplineStartResult){
+      .success = false,
+      .code = DISCIPLINE_START_ERR_ENABLE_FAIL,
+      .message = "训练启动失败"
+    };
   }
+
+  DEBUG_LOG("训练开始：PhaseThreshold=%d ns, TimeConstant=%d s\n", ns_threshold, time_constant);
+  return (DisciplineStartResult){
+    .success = true,
+    .code = DISCIPLINE_START_OK,
+    .message = "驯服已启动"
+  };
 }
 
 void discipliner_stop_training(const char *reason)
