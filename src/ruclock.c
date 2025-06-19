@@ -77,25 +77,50 @@ void discipliner_stop_training(const char *reason)
   DEBUG_LOG("训练终止：%s\n", reason);
 }
 
-T_CSAC_telemetry ruclock_discipliner_update_training_status() {
+DiscipliningStatus ruclock_discipliner_update_training_status() {
   T_CSAC_telemetry telemetry;
   get_telemetry_data(&telemetry);
+
+  DiscipliningStatus status;
+  status.disOK = telemetry.disOK;
+  status.steer = telemetry.steer;
+  status.phase = telemetry.phase;
+
   if (telemetry.disOK == 0) {
-    DEBUG_LOG("训练中：DiscOK=%d, Steer = %d, Phase=%d ns\n", telemetry.disOK, telemetry.steer, telemetry.phase);
+    status.training_status = 0;  // 训练中
+    snprintf(status.message, sizeof(status.message),
+             "训练中：Steer=%d, Phase=%d ns", telemetry.steer, telemetry.phase);
+    DEBUG_LOG("%s\n", status.message);
   }
 
   else if (telemetry.disOK == 1) {
-    discipliner_stop_training("驯服成功！");
+    status.training_status = 1;  // 成功
+    snprintf(status.message, sizeof(status.message), "驯服成功！");
+    discipliner_stop_training(status.message);
   }
 
   else if (telemetry.disOK == 2) {
-    discipliner_stop_training("驯服失败：信号中断");
-  } 
-  
-  else {
-    discipliner_stop_training("驯服错误：并未设置驯服模式");
+    status.training_status = 2;  // 失败
+    snprintf(status.message, sizeof(status.message),
+             "驯服失败：信号中断或Phase漂移超限！");
+    discipliner_stop_training(status.message);
   }
-  return telemetry;
+
+  else if (telemetry.disOK == -1) {
+    status.training_status = -1;  // 错误
+    snprintf(status.message, sizeof(status.message),
+             "驯服错误：未设置训练模式");
+    discipliner_stop_training(status.message);
+  }
+
+  else {
+    status.training_status = -1;  // 异常
+    snprintf(status.message, sizeof(status.message),
+             "未知错误：DiscOK=%d", telemetry.disOK);
+    discipliner_stop_training(status.message);
+  }
+
+  return status;
 }
 
 

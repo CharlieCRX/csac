@@ -22,6 +22,14 @@ typedef struct {
 } DisciplineStartResult;
 
 
+typedef struct {
+  int disOK;  // 训练状态
+  int phase;  // 相位漂移
+  int steer;  // 频率调整值
+  int training_status; // 0: 正在训练，1: 成功，2: 失败，-1: 错误
+  char message[64];    // 状态说明，可选
+} DiscipliningStatus;
+
 /**
  * @brief 启动铷钟训练过程
  *
@@ -54,7 +62,7 @@ DisciplineStartResult ruclock_discipliner_start_training(uint8_t ns_threshold, u
  *
  * @return T_CSAC_telemetry 返回当前的遥测数据，供前端继续跟踪训练状态。
  */
-T_CSAC_telemetry ruclock_discipliner_update_training_status();
+DiscipliningStatus ruclock_discipliner_update_training_status();
 
 
 

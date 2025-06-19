@@ -124,14 +124,14 @@ void test_update_training_status() {
   DEBUG_LOG("更新训练状态测试...\n");
   
   // 执行状态更新
-  T_CSAC_telemetry result = ruclock_discipliner_update_training_status();
+  DiscipliningStatus result = ruclock_discipliner_update_training_status();
   
   // 输出结果
-  if (result.disOK == 1) {
+  if (result.training_status == 1) {
     DEBUG_LOG("训练已完成！\n");
-  } else if (result.disOK == 2) {
+  } else if (result.training_status == 2) {
     ERR_LOG("训练失败：信号中断或其他错误！\n");
-  } else if (result.disOK == 0) {
+  } else if (result.training_status == 0) {
     DEBUG_LOG("训练仍在进行中：DiscOK=%d, Phase=%d ns\n", result.disOK, result.phase);
   } else {
     ERR_LOG("未启用驯服模式：DiscOK=%d\n", result.disOK);
